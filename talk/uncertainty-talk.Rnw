@@ -1,0 +1,290 @@
+%\documentclass[handout,xcolor=pdftex,dvipsnames,table]{beamer}
+%\documentclass[draft]{beamer}
+%\documentclass[notesonly]{beamer}
+%\documentclass[notes]{beamer}
+\documentclass[aspectratio=169]{beamer}
+\mode<presentation>
+\usetheme{Singapore} %Berkeley, Palo Alto, Singapore, Warsaw
+%\usecolortheme{seagull}  %Beaver, dolphin, dove, lily, orchid, seagull, seahorse
+
+%\usefonttheme{serif}
+% font themes: default, professionalfonts, serif, structurebold, structureitalicserif, structuresmallcapsserif
+
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}          %% Used in risk tables
+\usepackage{multirow}          %% Used in decision tables
+%\usepackage{beamerarticle}
+%\usepackage{enumitem}
+%\usepackage{beamerthemesplit}
+\usepackage[T1]{fontenc}  %to use < or > in tables
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+%% syntax is \mlc{first line\\secondline}
+\newcommand{\mlc}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\subscr}[1]{$_{\text{#1}}$}
+\newcommand{\Fforty}{F_{\text{SPR}=40\%}}       % Needs to be done as $\Fforty$
+\newcommand{\Bforty}{B_{\text{SPR}=40\%}}
+
+% pdf is displayed in full screen mode automatically
+%\hypersetup{pdfpagemode=FullScreen}
+
+%\setbeamersize{sidebar width left=0.05in}
+\setbeamersize{text margin left=0.1in}
+\setbeamersize{text margin right=0.1in}
+
+\setbeamertemplate{title page}
+{
+% Looks like for hake we didn't use the defaults and played with the spacing
+% \vskip0pt plus 1filll
+\begin{center}
+{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\\
+\vskip22pt
+\insertauthor
+\vskip22pt
+\insertinstitute
+% \insertdate
+\end{center}
+\vskip30pt
+\vfill
+\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle % \par
+% \vskip0pt plus 1filll
+\hfill
+\includegraphics[width=5cm]{images/DFO_Logo.png}   % from Wikipedia (for hake we
+                                        % had an older one)
+\vskip10pt
+}
+
+\definecolor{pageCol}{rgb}{0.5,0.5,1.0}
+
+\setbeamertemplate{footline}
+{
+\begin{beamercolorbox}[wd=.05\paperwidth,ht=0ex,dp=0ex,left]{framenumber in head/foot}%
+\insertframenumber/\inserttotalframenumber
+\end{beamercolorbox}%
+}
+%% \setbeamercolor{footline}{fg=pageCol}
+
+\newcounter{saveenumi}
+
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\bn}{\begin{enumerate}}
+\newcommand{\en}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+%% <<echo=TRUE,  message=TRUE, results='show', warning=TRUE>>=
+%% opts_chunk$set(dev='cairo_ps',fig.path='knitr-cache/', fig.dpi=96, fig.width=7.5,
+%%                fig.height=4, echo=TRUE, results=TRUE, message=TRUE, warning=TRUE,
+%%                results='show', cache=TRUE, cache.path='knitr-cache/')
+<<load-everything, echo=FALSE,  message=FALSE, results='hide', warning=FALSE>>=
+opts_chunk$set(dev = 'cairo_ps',
+               fig.path = 'knitr-cache/',
+               fig.dpi = 96,
+               fig.width = 7.5,
+               fig.height = 4,
+               echo = FALSE,
+               results = FALSE,
+               message = FALSE,
+               warning = FALSE,
+               results = 'hide',
+               cache = TRUE,
+               cache.path = 'knitr-cache/')
+
+assess.yr = 2018
+last.assess.yr = assess.yr - 1
+survey.end.yr = 2017
+ss.version = 999 # to get working here
+admb.version = 999
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Uncertainty]{Including uncertainty in advice to managers}
+\author{Andrew Edwards}
+\institute{Pacific Biological Station, Nanaimo, BC 
+  [I'll add a photo of PBS, or
+  a fish, then finalise spacing]}
+\date{{\footnotesize SRG meeting -- \Sexpr{assess.yr}}}
+\subtitle{\small Lecture 5 of TESA's Introduction to Stock Assessment WebEx series.}
+
+\begin{document}
+
+\frame[plain]{
+\titlepage
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outline}
+\subsection{}
+\frame{\frametitle{Outline}
+\bi
+  \item Model changes from \Sexpr{last.assess.yr}
+  \item Show some MCMC diagnostics
+  \item Fits to data
+  \item Estimates of key quantities
+  \item Response to \Sexpr{last.assess.yr} SRG assessment recommendations
+  \item Summary
+\ei
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Changes from \Sexpr{last.assess.yr}}
+\subsection{}
+
+\begin{frame}     % AME - not sure if can just use \frame{} everywhere like the 
+                  %  above slide
+\frametitle{Changes from \Sexpr{last.assess.yr} assessment}
+  \bi
+    \item Added new data from \Sexpr{last.assess.yr}:
+    \bi
+      \item Survey age data and biomass index for \Sexpr{survey.end.yr}
+      \item Fishery catch and age data for \Sexpr{last.assess.yr}
+      \item Weight-at-age values for \Sexpr{last.assess.yr}
+    \ei
+    \item Updated maturity ogive
+    \item Stock Synthesis version \Sexpr{ss.version} (updated from 3.24U)
+      and compiled with ADMB \Sexpr{admb.version}
+    \bi
+      \item Necessitates modified parameterisation for time-varying selectivity
+    \ei
+    \item New approach to weighting age-composition data
+    % \item Usual update of bias adjustment ramps for recruitment deviations
+    % \item Usual update of main recruitment deviate estimation period
+  \ei
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Changes from \Sexpr{last.assess.yr} assessment}
+
+Stock Synthesis version \Sexpr{ss.version} (updated from 3.24U):
+\bi
+  \item Behind-the-scenes changes and new features.
+  \item Extensively tested prior to release.
+  \item Used in at least six assessments in 2017.
+  \item However, time-varying parameters can no longer have a logistic
+    transformation -- changed because interpretation of the parameter values was
+    previously difficult and appropriate parameter bounds make the
+    transformation unnecessary.
+  \item Therefore requires a {\em modified} parameterisation for time-varying
+      selectivity.
+\ei
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Time-varying fishery selectivity ($\phi$)}
+
+\bi
+  \item Used since 2014 assessment.
+  \item Deviations are applied to selectivity-at-age parameters.
+  \item Normally-distributed penalty function applied to keep deviations
+    straying too far from zero.
+  \item Deviation is controlled by fixed standard deviation parameter $\phi$.
+  ~\\
+  \item In 2017 we used $\phi=0.20$, an increase from previous $\phi=0.03$.
+    In 2017 this greater deviation (more flexibility) was used because:
+    \bi
+      \item The large proportion of 2014 cohort in 2016 age data (age-2 fish)
+        meant that $\phi=0.03$ produced implausible estimates of 2014 recruitment
+        (about three times larger than 1999 and 2010 recruitments).
+      \item $\phi=0.03$ estimates of 2014 recruitment were inconsistent
+        with the qualitative comparison to the age-1 index.
+      \item Good performance of higher $\phi$ in past MSE work.
+    \ei
+\ei
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Time-varying fishery selectivity ($\phi$ becomes $\Phi$)}
+
+\bi
+  \item Previously-used logistic transformation not available in Stock Synthesis
+    3.30 (and proved unnecessary as bounds were not approached).
+  \item Deviations now applied directly to the un-transformed incremental
+    selectivity parameters $p_a$ (page~41).
+  \item We define $\Phi$ to be the standard deviation of the normally-distributed
+    penalty distribution of the deviations.
+  \item Based on the previous bounds, equivalent flexibility was found
+    to occur with
+    \begin{equation}
+    \nonumber \Phi = 7 \phi
+    \end{equation}
+  \item So $\Phi = 1.40$ has equivalent flexibility to $\phi=0.20$.
+  \item This is a technical update, not really a structural change (is included
+    in first bridging step).
+  \item Different values of $\Phi$ will be explored.
+\ei
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Bridging to the base model: update SS and
+    pre-\Sexpr{assess.yr-1} data}
+  \bc
+  \vspace{-5pt}
+  <<bridge.biomass, fig.height=5, fig.width=10, out.width='0.95\\columnwidth'>>=
+    par(mfrow = c(1,2))
+    plot(1:10)
+    plot(1:20)
+    box()
+  @
+  \ec
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{New approach to weighting age-composition data}
+
+\bi
+  \item 2017 (and earlier) assessments used:
+  \bi
+    \item multinomial likelihood function;
+    \item tuning method for weighting age composition data, by manually iteratively
+      adjusting a multiplier of the input sample sizes until they
+      roughly equal the harmonic mean of the effective sample sizes
+      (McAllister \& Ianelli, 1997).
+  \ei
+  ~\\
+  \item Here use a new Dirichlet-Multinomial likelihood (Thorson et al.,
+    {\em Fisheries Research}, 2017):
+  \bi
+    \item Estimated parameter, $\theta$, automatically adjusts the weight given to
+       the composition data.
+    \item Removes need for manual iterative reweighting (and the subjective
+      choice of how many iterations to do).
+    \item Ensures results of model sensitivities, retrospective analyses,
+       and likelihood profiles are all automatically tuned, rather than having
+       same weights as the base model.
+    \item Increases efficiency of the assessment process.
+    \item Was tested on a simplified version of the 2015 hake assessment model.
+    \item We estimate $\theta_{\text{surv}}$ and $\theta_{\text{fish}}$.
+  \ei
+\ei
+\end{frame}
+
+%----------------------------------------------------------
+
+\section{Ooh -- a colour figure!}
+\begin{frame}
+\frametitle{Bridging to the base model: fishery and survey data}
+  \bc
+  % Replacing knitr chunk with resulting figures
+  \includegraphics[height=3in]{images/bridge_biomass2-1.eps}
+  \ec
+\end{frame}
+
+\end{document}

@@ -3,6 +3,10 @@
 .RData
 
 *.pdf
+*.tex
+*.snm
+*.nav
+
 *.rda
 *.rds
 *.aux
