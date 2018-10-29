@@ -170,13 +170,13 @@ admb.version = 999
 \frametitle{Basics}
 
 
-\begin{tabular}{lcrrrr}
-  & Fraction & Decimal & Percentage & Odds & Ratio \\
+\begin{tabular}{lcrrr}
+  & Fraction & Decimal & Percentage & Odds \\
 Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & 0.5 & 50\% & 1 in
-                                                                            2 & 50:50\\
-  & & & & & \\
+                                                                            2 \\
+  & & & & \\
 Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & 0.167 & 16.7\% & 1 in
-                                                                            6 & 83.3:16.7**\\
+                                                                            6 \\
   
 \end{tabular}
 
