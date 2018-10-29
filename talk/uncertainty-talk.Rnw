@@ -169,16 +169,27 @@ admb.version = 999
                   %  above slide
 \frametitle{Basics}
 
-
-\begin{tabular}{lcrrr}
+\begin{tabular}{lrrrr}
   & Fraction & Decimal & Percentage & Odds \\
-Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & 0.5 & 50\% & 1 in
-                                                                            2 \\
   & & & & \\
-Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & 0.167 & 16.7\% & 1 in
-                                                                            6 \\
-  
+Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<2-3>{0.5} & \textcolor<3>{blue}{50\%} & 1 in
+                                                                             2 \\
+  & & & & \\
+Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<2-3>{0.167} & \textcolor<3>{blue}{16.7\%} & 1 in
+                                                                            6 
 \end{tabular}
+
+~\\
+
+~\\
+
+~\\
+
+\onslide<2-3>\alert{~~~~~~~~Easier to use in calculations}\\
+
+~\\
+
+\onslide<3>\textcolor{blue}{~~~~~~~~Maybe more easily understood by stakeholders}
 
 \end{frame}
 
@@ -191,6 +202,21 @@ Text...
 \bi
   \item Bullet
 \ei
+
+
+\textbf<2>{Example Text}
+\textit<2>{Example Text}
+\textsl<2>{Example Text}
+\textrm<2>{Example Text}
+\textsf<2>{Example Text}
+\textcolor<2>{orange}{Example Text}
+\alert<2>{Example Text}
+\structure<2>{Example Text}
+
+%\begin{enumerate}[(I)]
+% \alert<1>0.5
+%\end{enumerate}
+
 \end{frame}
 
 %----------------------------------------------------------
