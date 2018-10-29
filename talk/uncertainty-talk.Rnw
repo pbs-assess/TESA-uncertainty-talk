@@ -167,7 +167,7 @@ admb.version = 999
 
 \begin{frame}     % AME - not sure if can just use \frame{} everywhere like the 
                   %  above slide
-\frametitle{Basics}
+\frametitle{Basics **just have one row for first}
 
 \begin{tabular}{lrrrr}
   & Fraction & Decimal & Percentage & Odds \\
@@ -192,6 +192,146 @@ Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<2-3>{0.167}
 \onslide<3>\textcolor{blue}{~~~~~~~~Maybe more easily understood by stakeholders}
 
 \end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}   
+\frametitle{Basics}
+
+Probability is always of \alert{\emph{some event happening}}, for example:
+
+\bi
+\item probability that \alert{\emph{a tossed coin lands heads}}
+\ei
+
+Write this as:
+
+\bi
+\item P(a tossed coin lands heads)
+\item P(heads)
+\ei
+
+\pause
+
+~\\
+
+Other events:
+\bi
+\item P(a die roll gives a 6)
+\item P(a given fish stock is currently in the healthy zone)
+\ei
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}   
+\frametitle{Basics}
+
+\begin{tabular}{ll}
+  & Example \\
+  & \\
+P(impossible event) = 0 & P(standard die gives a 7) \\
+  & \\
+P(definite event) = 1 & P(everyone's children got too much candy\\
+  &                       ~~~~trick-or-treating last night) \\
+  & \\
+Everything else is between 0 and 1 &  P(it will rain tomorrow at a given location)
+                                     
+\end{tabular}
+
+\pause
+
+~\\
+
+Probabilities of all possible events add up to 1.
+
+P(heads) = 0.5
+
+P(tails) = 0.5
+
+P(heads) $+$ P(tails) = 1~~ (the coin must lands on heads or tails)
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+P(heads, given we know it is a fair coin)
+
+P(event, given parameter)
+
+Often we want the other way round
+
+P(parameter, given event)
+
+P(coin is fair | head)
+
+P(coin is fair | HH)
+
+P(coin is fair | HHHHHHHH)
+
+Rosencratz....
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template }
+
+Text...
+\bi
+  \item Bullet
+\ei
+
+
+
+Text...
+\bi
+  \item Bullet
+\ei
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template }
+
+Text...
+\bi
+  \item Bullet
+\ei
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template }
+
+Text...
+\bi
+  \item Bullet
+\ei
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template }
+
+Text...
+\bi
+  \item Bullet
+\ei
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template }
+
+Text...
+\bi
+  \item Bullet
+\ei
 
 %----------------------------------------------------------
 
