@@ -218,7 +218,7 @@ Write this as:
 Other events:
 \bi
 \item P(a die roll gives a 6)
-\item P(a given fish stock is currently in the healthy zone)
+\item P(fish stock is currently in the healthy zone)
 \ei
 
 \end{frame}
@@ -229,14 +229,15 @@ Other events:
 \frametitle{Basics}
 
 \begin{tabular}{ll}
-  & Example \\
+  & Examples \\
   & \\
 P(impossible event) = 0 & P(standard die gives a 7) \\
   & \\
 P(definite event) = 1 & P(everyone's children got too much candy\\
   &                       ~~~~trick-or-treating last night) \\
   & \\
-Everything else is between 0 and 1 &  P(it will rain tomorrow at a given location)
+Everything else is between 0 and 1 & P(it will rain tomorrow at a given location)\\
+                                   & P(fish stock is currently in the healthy zone)
                                      
 \end{tabular}
 
@@ -257,7 +258,11 @@ P(heads) $+$ P(tails) = 1~~ (the coin must lands on heads or tails)
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Likelihood}
+\frametitle{What about the other way round?}
+
+We have a coin, and what to know if it is fair or not?
+
+Fair coin: P(heads) = P(tails) = 0.5
 
 P(heads, given we know it is a fair coin)
 
@@ -265,17 +270,79 @@ P(event, given parameter)
 
 Often we want the other way round
 
+
 P(parameter, given event)
+P(parameter, given data)
 
-P(coin is fair | head)
 
-P(coin is fair | HH)
 
-P(coin is fair | HHHHHHHH)
 
+\begin{tabular}{ll}
+  
+ Different data  & Intuition\\
+
+P(coin is fair | H) & coin could well be fair, how can I tell? \\
+
+P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\ 
+% Independence
+P(coin is fair | HHHH) & hmmm...., bit suspicious \\
+                         
+P(coin is fair | ** Heads) & no way \\
+\end{tabular}
 Rosencratz....
 
+That's essentially the idea of \emph{likelihood}.
 
+We have data, and from that we want to infer parameters and then make other
+calculations.
+
+Somewhere: Please don't say `likelihood' when you simply mean `probability'. 
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Likelihood allows us to use a mathematical model estimate
+
+~~P(stock is in the healthy zone | data)
+
+In practice we often need to use a \emph{Bayesian} approach, due to complexity
+of models
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian approach}
+
+Involves using \emph{prior} information and combining it with the
+\emph{likelihood} of the data to give a \emph{posterior}.
+
+Example -- want to estimate the proportion of vehicles (bikes and cars) going
+down a street that are bikes.
+
+Call this proportion $p$.
+
+Your prior `belief' is that $p$ is around 0.2, but you're not really sure.
+
+....**Do decision tables first**
+
+Slides based on science101andy.ppt ones.
+
+In assessment models, priors help constrain the model.
+
+I'm most familiar with age-structured models -- if we do not constrain some of the
+parameters then 
+
+it can be hard for the model to be optimised (find the set of parameters that
+are most likely).
+
+This approach then allows us to calculate the probability of events.
+
+\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
@@ -286,13 +353,7 @@ Text...
   \item Bullet
 \ei
 
-
-
-Text...
-\bi
-  \item Bullet
-\ei
-
+\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
@@ -303,6 +364,7 @@ Text...
   \item Bullet
 \ei
 
+\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
@@ -313,26 +375,7 @@ Text...
   \item Bullet
 \ei
 
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{**Template }
-
-Text...
-\bi
-  \item Bullet
-\ei
-
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{**Template }
-
-Text...
-\bi
-  \item Bullet
-\ei
-
+\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
