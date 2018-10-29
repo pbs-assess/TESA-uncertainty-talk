@@ -106,7 +106,7 @@ admb.version = 999
 \title[Uncertainty]{Including uncertainty in advice to managers}
 \author{Andrew Edwards}
 \institute{Pacific Biological Station, Nanaimo, BC 
-  [I'll add a photo of PBS, or
+  [** add a photo of PBS, or
   a fish, then finalise spacing]}
 \date{{\footnotesize SRG meeting -- \Sexpr{assess.yr}}}
 \subtitle{\small Lecture 5 of TESA's Introduction to Stock Assessment WebEx series.}
@@ -121,42 +121,76 @@ admb.version = 999
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Outline}
 \subsection{}
-\frame{\frametitle{Outline}
+\frame{\frametitle{**Outline}
 \bi
-  \item Model changes from \Sexpr{last.assess.yr}
-  \item Show some MCMC diagnostics
-  \item Fits to data
-  \item Estimates of key quantities
-  \item Response to \Sexpr{last.assess.yr} SRG assessment recommendations
-  \item Summary
+  \item Basic introduction to probability
+  \item Types of probabilities we can calculate in assessments
+  \item .....
+  \item 
+  \item 
+  \item 
 \ei
 }
 
 
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{About me **add photo}
+
+\bi
+  \item Research Scientist at Pacific Biological Station since 2007
+  \item Previously worked at Bedford Institute of Oceanography \& Dalhousie
+  \item Stock assessment work
+  \bi
+    \item rockfish (long-lived, good age data)
+    \item Pacific Hake (joint with U.S. colleagues)
+    \item data synopsis for $>100$ species of British Columbia groundfish
+  \ei
+  \item Recent research
+  \bi  
+    \item methods for fitting size spectra
+    \item notation guidelines (in press):
+  \ei
+\ei
+\medskip
+%\hfill
+~~~\includegraphics[width=12cm]{images/notation-header.png}
+% \vskip10pt
+\end{frame}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%
-\section{Changes from \Sexpr{last.assess.yr}}
+\section{Introduction to probability}
 \subsection{}
 
 \begin{frame}     % AME - not sure if can just use \frame{} everywhere like the 
                   %  above slide
-\frametitle{Changes from \Sexpr{last.assess.yr} assessment}
-  \bi
-    \item Added new data from \Sexpr{last.assess.yr}:
-    \bi
-      \item Survey age data and biomass index for \Sexpr{survey.end.yr}
-      \item Fishery catch and age data for \Sexpr{last.assess.yr}
-      \item Weight-at-age values for \Sexpr{last.assess.yr}
-    \ei
-    \item Updated maturity ogive
-    \item Stock Synthesis version \Sexpr{ss.version} (updated from 3.24U)
-      and compiled with ADMB \Sexpr{admb.version}
-    \bi
-      \item Necessitates modified parameterisation for time-varying selectivity
-    \ei
-    \item New approach to weighting age-composition data
-    % \item Usual update of bias adjustment ramps for recruitment deviations
-    % \item Usual update of main recruitment deviate estimation period
-  \ei
+\frametitle{Basics}
+
+
+\begin{tabular}{lcrrrr}
+  & Fraction & Decimal & Percentage & Odds & Ratio \\
+Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & 0.5 & 50\% & 1 in
+                                                                            2 & 50:50\\
+  & & & & & \\
+Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & 0.167 & 16.7\% & 1 in
+                                                                            6 & 83.3:16.7**\\
+  
+\end{tabular}
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template }
+
+Text...
+\bi
+  \item Bullet
+\ei
 \end{frame}
 
 %----------------------------------------------------------
