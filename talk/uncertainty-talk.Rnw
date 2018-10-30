@@ -56,8 +56,8 @@
 %\hypersetup{pdfpagemode=FullScreen}
 
 %\setbeamersize{sidebar width left=0.05in}
-\setbeamersize{text margin left=0.1in}
-\setbeamersize{text margin right=0.1in}
+\setbeamersize{text margin left=5mm}
+\setbeamersize{text margin right=5mm}
 
 \setbeamertemplate{title page}
 {
@@ -156,7 +156,7 @@ Thursday 1st November, 2018}
   \item Basic introduction to probability
   \item Examples of probabilities that we can calculate in assessments
   \item Communicating uncertainty
-  \bi 
+  \bi
     \item Stock status
     \item Projections
     \item Decision tables
@@ -193,7 +193,8 @@ Thursday 1st November, 2018}
 \medskip
 %\hfill
 \pause
-~~~\includegraphics[width=10cm]{images/notation-header.png}
+% \includegraphics[width=5cm, right]{images/MEE.png}\\
+~~~\includegraphics[width=10cm, center]{images/notation-header.png}
 % \vskip10pt
 \end{frame}
 
@@ -211,10 +212,10 @@ Thursday 1st November, 2018}
 \begin{tabular}{lrrrr}
   & Fraction & Decimal & Percentage & Odds \\
   & & & & \\
-Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} & 
+Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} &
   \textcolor<4>{blue}{50\%} & 1 in 2 \\
   & & & & \\
-\onslide<2->Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & 
+\onslide<2->Probability that a rolled die gives a six: & $\dfrac{1}{6}$ &
   \alert<3-4>{0.167} & \textcolor<4>{blue}{16.7\%} & 1 in 6
 \end{tabular}
 \includegraphics<2-4>[height=1cm, right]{images/die-roll.png}
@@ -298,11 +299,35 @@ Probabilities of \textcolor{red}{all possible events} add up to 1:
 \begin{frame}
 \frametitle{Do discrete values (easy), cts (harder)}
 
-Die rolls -- can only take \alert{discrete} values: 1, 2, 3, 4, 5 or 6.
+A die rolls can only produce \alert{discrete} values: 1, 2, 3, 4, 5 or 6.
 
-Count data are \alert{discrete} and take whole numbers:
+~\\
 
-~~e.g. annual numbers of lynx trappings for 1821-1934 in Canada:
+Roll it 600 times and count up number from each roll:
+
+~\\
+<<roll, fig.height=2.4>>=
+set.seed(42)
+rolls = sample(x=1:6, size=600, replace=TRUE)
+cmai=c(0.8, 0.8, 0.15, 0.3)
+par(mai=cmai)
+plot(as.factor(rolls), xlab="Number on die", ylab="Count", ylim=c(0,100))
+@
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**}
+
+Similarly, count data are \alert{discrete} and take whole numbers.
+
+~\\
+
+Such as annual numbers of lynx trappings for 1821-1934 in Canada:
+
+~\\
 
 ~~269,  321,  585,  871, 1475, 2821, 3928, 5943, 4950, 2577, ...
 
@@ -310,18 +335,16 @@ Count data are \alert{discrete} and take whole numbers:
 
 ~\\
 
-But many measured values are \alert{continuous} (can take any value).
+But many measured values are \alert{continuous} -- they can take any value from
+a continuous range. For example:
 
-Temperature is continuous, though measured values are discrete (due to the
-precision of the instrument).
+\bi
+\item weight
+\item length
+\item temperature
+\item depth
+\ei
 
-~~e.g. body temperature of a beaver at 10-minute intervals
-
-<<beaver, results="asis">>=
-kable(beaver1[1:6, 2:3], "latex", booktabs = TRUE) %>%
-      kable_styling(latex_options = "striped")
-      # column_spec(1, width = "3cm")
-@
 
 \end{frame}
 %----------------------------------------------------------
@@ -329,13 +352,58 @@ kable(beaver1[1:6, 2:3], "latex", booktabs = TRUE) %>%
 \begin{frame}
 \frametitle{**Communicating uncertainty}
 
+For discrete variables we can talk about P(die roll is 3), P(die roll is 4).
+
+~\\
+
+However, for continuous variables, we cannot say P(this fish weighs 257~g).
+
+~\\
+
+No fish will weigh \alert{exactly} 257~g. Therefore 
+
+~~P(this fish weighs 257~g) = 0
+
+as it's an impossible event. 
+
+~\\
+
+So we have to talk about probability of the weight being within a range, such
+as
+
+~~P(250~g $<$ fish weight $\leq$ 260~g).
+
+% skip:
+
+% Temperature is continuous, though measured values are discrete (due to the
+% precision of the instrument).
+
+% ~~e.g. body temperature of a beaver at 10-minute intervals
+
+% <<beaver, results="asis">>=
+% kable(beaver1[1:6, 2:3], "latex", booktabs = TRUE) %>%
+%      kable_styling(latex_options = "striped")
+%      # column_spec(1, width = "3cm")
+% @
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**}
+
+Graphically, this can be shown as
+
+**Draw cts, shade in, based on plot(thetavec).
+
 Cts - can only talk about P(X $\leq$3). etc.
 
-Histograms.
-
-pdf maybe
 
 Results are distributions.
+
+**In practice can think of as representing a histogram of results.
+
+**Then do mean, median, mode. And quantiles.
 
 Show results, then will explain some of the methods used to get results (mention
 Bayes etc. at start).
@@ -440,20 +508,15 @@ Spawning biomass up to 2013 (black), and projected spawning biomass (red) based 
 \begin{frame}
 \frametitle{**Decision tables}
 
-In fisheries science, a decision table presents potential consequences of different decisions, and is used to help facilitate decision making.
+In fisheries science, a decision table presents \alert{potential consequences of different decisions}, and is used to help facilitate decision making.
+
+
+For example...
 
 Based on projections:
 
-Probabilities of being in healthy zone for up to 10 years based on different
+Probabilities of being in healthy zone each year based on different
 levels of \alert{constant} catch.
-
-**Try and use Rowan's code, and use kable to shade nicely. May need to try and
-use the same data.
-
-Else copy ppt one in.
-
-
-Highlight a row.
 
 \end{frame}
 %----------------------------------------------------------
@@ -705,6 +768,68 @@ This approach then allows us to calculate the probability of events.
 
 \end{frame}
 
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian figures*** three like before}
+% From images/bayes-figures/draper4btalk.r from 2004
+
+<<bayes-figs, out.width='0.95\\columnwidth', fig.height=3>>=
+# fig.height=5, fig.width=10,
+nvec = c(5,20,100)			# n vehicles observed   74
+svec = c(2,8,40)				# s of them were bikes  16
+
+choice = 1
+n = nvec[choice]
+s = svec[choice]
+
+thetavec = seq(0.01,0.99,0.001)	# theta is proportion that are bikes
+
+prior = dbeta(thetavec, 2,6.4)
+L = thetavec^s * (1 - thetavec)^(n-s)
+post = dbeta(thetavec, 2+s, 6.4+n-s)
+
+# windows(height=3, width=3* 2.2)  # width = 2.2, cmai[2]=0.46 was good with no
+						# label on y axis
+# cmai=c(0.96, 1.0, 0.77, 0.39) - good for having axes label words, but too
+		 # much white space for no labels (but do want numbers):
+
+cmai=c(0.46, 0.46, 0.3, 0.3)
+
+#png("millar22talk1.png", height=480, width=480)    #3,8 in windows()
+# par(mfrow=c(1,2), mai=cmai) # , lwd=3)
+
+tsize = 1.5 * 1.5
+ymax = 9  # 1.1*max(post)
+
+par(mai=cmai, mfrow=c(1,3))
+# windows(height=3, width=2.2)   before each if doing individually
+# par(mai=cmai)		# plotting the normalised L
+
+
+# plot(thetavec, post, ylim=c(0,ymax ), col="purple", type="h", xlim=c(0,0.8), xaxs="i", yaxs="i", cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")
+# lines(thetavec, post, lwd=3)
+
+
+plot(thetavec, prior, ylim=c(0,ymax ),  col="red", type="h", xlim=c(0,0.8), xaxs="i", yaxs="i", cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")# , lwd=3) )
+points(thetavec, L/sum(L)*1000, col="blue", type="h")
+# lines(thetavec, L/sum(L)*1000, lwd=3)
+points(thetavec, post, col="purple", type="h")
+lines(thetavec, post, lwd=3)
+lines(thetavec, L/sum(L)*1000, lwd=3, lty=2)
+lines(thetavec, prior, lwd=3, lty=2)
+
+plot(thetavec, L/sum(L)*1000, ylim=c(0,ymax ), col="blue", type="h", xlim=c(0,0.8), xaxs="i", yaxs="i", cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")
+lines(thetavec, L/sum(L)*1000, lwd=3)
+
+plot(thetavec, prior, ylim=c(0,ymax ),  col="red", type="h", xlim=c(0,0.8), xaxs="i", yaxs="i", cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")# , lwd=3) )
+lines(thetavec, prior, lwd=3)
+
+@
+
+
+
+\end{frame}
 
 
 %----------------------------------------------------------
@@ -776,7 +901,7 @@ You might hear ``the risk of being in the cautious zone''
 
 More formally, we would associate it with a probability **need definition** Rob?
 
-Quantitatively, risk is the \alert``expected value of an undesirable outcome''. 
+Quantitatively, risk is the \alert``expected value of an undesirable outcome''.
 
 Prob outcome $\times$ expected loss if outcome occurs
 
