@@ -5,8 +5,11 @@
 \documentclass[aspectratio=169, xcolor=table]{beamer}  % xcolor to avoid conflict
                                                        %  with beamer
 \mode<presentation>
+% https://hartwork.org/beamer-theme-matrix/
 \usetheme{Singapore} %Berkeley, Palo Alto, Singapore, Warsaw
-%\usecolortheme{seagull}  %Beaver, dolphin, dove, lily, orchid, seagull, seahorse
+\usecolortheme{seahorse}  %Beaver, dolphin, dove, lily, orchid, seagull, seahorse
+\renewcommand{\insertnavigation}[1]{}    % to remove contents bar:
+           % https://tex.stackexchange.com/questions/33767/remove-section-header-from-a-beamer-theme-singapore
 
 %\usefonttheme{serif}
 % font themes: default, professionalfonts, serif, structurebold, structureitalicserif, structuresmallcapsserif
@@ -193,7 +196,7 @@ admb.version = 999
 \subsection{}
 
 \begin{frame}
-\frametitle{Basics}
+\frametitle{Introduction to probability}
 
 \includegraphics[height=1.5cm, right]{images/coin-toss.png}
 
@@ -223,7 +226,7 @@ Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Basics}
+\frametitle{Introduction to probability}
 
 Probability is always of \alert{\emph{some event happening}}, for example:
 
@@ -253,7 +256,7 @@ Other events:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Basics}
+\frametitle{Introduction to probability}
 
 \begin{tabular}{ll}
   & \textcolor{blue}{Examples} \\
@@ -632,7 +635,7 @@ You might hear ``the risk of being in the cautious zone''
 `Risk' is associated with a negative consequence:
 
 \bc
-\alert``chance or possibility of danger, loss, injury etc.'' (OED)
+\alert{``chance or possibility of danger, loss, injury etc.'' (OED)}
 \ec
 
 It does not mean probability -- you would not say ``the risk of getting heads''.
@@ -653,6 +656,8 @@ outcome (of losing) is more serious than just losing \$5.
 
 \begin{frame}
 \frametitle{**Template}
+
+\includegraphics[width=4cm, right]{images/roulette.png}
 
 \end{frame}
 
