@@ -287,95 +287,18 @@ Probabilities of \textcolor{red}{all possible events} add up to 1:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{What about the other way round?}
+\frametitle{Do discrete values (easy), cts (harder)}
 
-We have a coin, and what to know if it is fair or not?
+Cts - can only talk about P(X $\leq$3). etc. 
 
-Fair coin: P(heads) = P(tails) = 0.5
+Histograms.
 
-P(heads, given we know it is a fair coin)
+pdf maybe
 
-P(event, given parameter)
+Results are distributions.
 
-Often we want the other way round
-
-
-P(parameter, given event)
-P(parameter, given data)
-
-
-
-
-\begin{tabular}{ll}
-
- Different data  & Intuition\\
-
-P(coin is fair | H) & coin could well be fair, how can I tell? \\
-
-P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\
-% Independence
-P(coin is fair | HHHH) & hmmm...., bit suspicious \\
-
-P(coin is fair | ** Heads) & no way \\
-\end{tabular}
-Rosencratz....
-
-That's essentially the idea of \emph{likelihood}.
-
-We have data, and from that we want to infer parameters and then make other
-calculations.
-
-Somewhere: Please don't say `likelihood' when you simply mean `probability'.
-
-**Somewhere: define mean, median, mode. Maybe earlier.
-
-** Discrete distributions - prob of each event
-
-** We generally end up with continuous distributions, prob of $>$...
-
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{Likelihood}
-
-Likelihood allows us to use a mathematical model estimate
-
-~~P(stock is in the healthy zone | data)
-
-In practice we often need to use a \emph{Bayesian} approach, due to complexity
-of models
-
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{Bayesian approach}
-
-Involves using \emph{prior} information and combining it with the
-\emph{likelihood} of the data to give a \emph{posterior}.
-
-Example -- want to estimate the proportion of vehicles (bikes and cars) going
-down a street that are bikes.
-
-Call this proportion $p$.
-
-Your prior `belief' is that $p$ is around 0.2, but you're not really sure.
-
-....**Do decision tables first**
-
-Slides based on science101andy.ppt ones.
-
-In assessment models, priors help constrain the model.
-
-I'm most familiar with age-structured models -- if we do not constrain some of the
-parameters then
-
-it can be hard for the model to be optimised (find the set of parameters that
-are most likely).
-
-This approach then allows us to calculate the probability of events.
+Show results, then will explain some of the methods used to get results (mention
+Bayes etc. at start). 
 
 \end{frame}
 %----------------------------------------------------------
@@ -607,6 +530,121 @@ certainly across the department.
 \includegraphics[height=7.5cm]{images/combine-results.png}
 
 \end{frame}
+
+
+
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{What about the other way round?}
+
+**May well move to after some results - motivation for how do we do these
+calculations. If move then repeat an earlier slide.
+
+Back to coin tossing:
+\begin{eqnarray}
+\nonumber \mbox{P(heads)} & = & 0.5\\
+\nonumber \mbox{P(tails)} & = & 0.5
+% \nonumber \mbox{P(heads)} + \mbox{P(tails)} & = & 1
+\end{eqnarray}
+
+That tells us the \alert{probability of different outcomes} (heads or tails), given
+\textcolor{blue}{knowledge of how the system works} (the coin is fair and so the probabilities are equal).
+
+But often, we have \alert{data concerning different outcomes}, and want to
+\textcolor{blue}{infer how the system works}.
+
+We have a coin, and what to know if it is fair or not?
+
+Fair coin: P(heads) = P(tails) = 0.5
+
+P(heads, given we know it is a fair coin)
+
+P(event, given parameter)
+
+Often we want the other way round
+
+
+P(parameter, given event)
+P(parameter, given data)
+
+
+
+
+\begin{tabular}{ll}
+
+ Different data  & Intuition\\
+
+P(coin is fair | H) & coin could well be fair, how can I tell? \\
+
+P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\
+% Independence
+P(coin is fair | HHHH) & hmmm...., bit suspicious \\
+
+P(coin is fair | ** Heads) & no way \\
+\end{tabular}
+Rosencratz....
+
+That's essentially the idea of \emph{likelihood}.
+
+We have data, and from that we want to infer parameters and then make other
+calculations.
+
+Somewhere: Please don't say `likelihood' when you simply mean `probability'.
+
+**Somewhere: define mean, median, mode. Maybe earlier.
+
+** Discrete distributions - prob of each event
+
+** We generally end up with continuous distributions, prob of $>$...
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Likelihood allows us to use a mathematical model estimate
+
+~~P(stock is in the healthy zone | data)
+
+In practice we often need to use a \emph{Bayesian} approach, due to complexity
+of models
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian approach}
+
+Involves using \emph{prior} information and combining it with the
+\emph{likelihood} of the data to give a \emph{posterior}.
+
+Example -- want to estimate the proportion of vehicles (bikes and cars) going
+down a street that are bikes.
+
+Call this proportion $p$.
+
+Your prior `belief' is that $p$ is around 0.2, but you're not really sure.
+
+....**Do decision tables first**
+
+Slides based on science101andy.ppt ones.
+
+In assessment models, priors help constrain the model.
+
+I'm most familiar with age-structured models -- if we do not constrain some of the
+parameters then
+
+it can be hard for the model to be optimised (find the set of parameters that
+are most likely).
+
+This approach then allows us to calculate the probability of events.
+
+\end{frame}
+
+
 
 %----------------------------------------------------------
 
