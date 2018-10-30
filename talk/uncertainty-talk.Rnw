@@ -2,7 +2,7 @@
 %\documentclass[draft]{beamer}
 %\documentclass[notesonly]{beamer}
 %\documentclass[notes]{beamer}
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169, xcolor=table]{beamer}
 \mode<presentation>
 \usetheme{Singapore} %Berkeley, Palo Alto, Singapore, Warsaw
 %\usecolortheme{seagull}  %Beaver, dolphin, dove, lily, orchid, seagull, seahorse
@@ -14,12 +14,32 @@
 \usepackage{pgf}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{booktabs}          %% Used in risk tables
-\usepackage{multirow}          %% Used in decision tables
+%\usepackage{booktabs}          %% Used in risk tables [hake]
+%\usepackage{multirow}          %% Used in decision tables [hake]
 %\usepackage{beamerarticle}
 %\usepackage{enumitem}
 %\usepackage{beamerthemesplit}
 \usepackage[T1]{fontenc}  %to use < or > in tables
+% \usepackage{xcolor}            %% for kable
+% \usepackage[table]{xcolor}            %% for kable
+
+% From kableExtra documentation, commenting out some:
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}          %% Used in risk tables [hake]
+\usepackage{multirow}          %% Used in decision tables [hake]
+
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 %% syntax is \mlc{first line\\secondline}
@@ -94,6 +114,7 @@ opts_chunk$set(dev = 'cairo_ps',
                cache.path = 'knitr-cache/')
 library(dplyr)
 library(xtable)
+library(kableExtra)
 assess.yr = 2018
 last.assess.yr = assess.yr - 1
 survey.end.yr = 2017
@@ -496,7 +517,7 @@ or ** it's not really changing the probability much.
 %----------------------------------------------------------
 
 \begin{frame}
-  
+
 \frametitle{What if results had been the other way around?}
 
 <<dec-table2, results = "asis">>=
@@ -511,6 +532,20 @@ or ** it's not really changing the probability much.
 
 % ----------------------------------------------------------
 
+
+\begin{frame}
+\frametitle{**Try kable again}
+
+Nope, get conflict with xcolor
+
+<<dec-table3, results = "asis">>=
+ kable(df, "latex", booktabs = TRUE) %>%
+    kable_styling(latex_options = "striped")
+@
+
+
+\end{frame}
+%----------------------------------------------------------
 
 \begin{frame}
 \frametitle{How to fisheries managers use information to make decisions?}
