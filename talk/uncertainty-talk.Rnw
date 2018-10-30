@@ -99,7 +99,7 @@
 \newcommand{\en}{\end{enumerate}}
 \newcommand{\bi}{\begin{itemize}}
 \newcommand{\ei}{\end{itemize}}
-
+\newcommand{\Bmsy}{B_{MSY}}
 %% <<echo=TRUE,  message=TRUE, results='show', warning=TRUE>>=
 %% opts_chunk$set(dev='cairo_ps',fig.path='knitr-cache/', fig.dpi=96, fig.width=7.5,
 %%                fig.height=4, echo=TRUE, results=TRUE, message=TRUE, warning=TRUE,
@@ -360,11 +360,11 @@ However, for continuous variables, we cannot say P(this fish weighs 257~g).
 
 ~\\
 
-No fish will weigh \alert{exactly} 257~g. Therefore 
+No fish will weigh \alert{exactly} 257~g. Therefore
 
 ~~P(this fish weighs 257~g) = 0
 
-as it's an impossible event. 
+as it's an impossible event.
 
 ~\\
 
@@ -524,6 +524,7 @@ levels of \alert{constant} catch.
 \begin{frame}
 \frametitle{How do fisheries managers use information to make decisions?}
 
+\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table, results = "asis">>=
 # Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
 #  Changing years to avoid confusion that it's projections
@@ -538,9 +539,10 @@ df = tibble("Annual catch strategy (t)" = seq(0, 1000, 200),
 kable(df, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
       column_spec(1, width = "2.5cm")
+      # add_header_above("hello") #c(" ", "Group 1" = 5, "Group 2" = 6))
 @
-**mention Tammi - looked at in a different way that I had thought. If quota is 0
-or ** it's not really changing the probability much.
+
+600 t is just above average recent catch of 547 t
 
 \end{frame}
 
@@ -549,11 +551,48 @@ or ** it's not really changing the probability much.
 \begin{frame}
 \frametitle{How do fisheries managers use information to make decisions?}
 
+\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table4, results = "asis">>=
 kable(df, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
       column_spec(1, width = "2.5cm") %>%
       row_spec(4, color = "red")
+@
+
+600 t is just above average recent catch of 547 t
+
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{How do fisheries managers use information to make decisions?}
+
+\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
+<<dec-table5, results = "asis">>=
+kable(df, "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped") %>%
+      column_spec(1, width = "2.5cm") %>%
+      row_spec(1, color = "red")
+@
+
+600 t is just above average recent catch of 547 t
+
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{How do fisheries managers use information to make decisions?}
+
+\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
+<<dec-table6, results = "asis">>=
+kable(df, "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped") %>%
+      column_spec(1, width = "2.5cm") %>%
+      row_spec(6, color = "red")
 @
 
 600 t is just above average recent catch of 547 t
@@ -567,12 +606,15 @@ kable(df, "latex", booktabs = TRUE) %>%
 \begin{frame}
 \frametitle{Fisheries manager had another interpretation}
 
+\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table3, results = "asis">>=
  kable(df, "latex", booktabs = TRUE) %>%
        kable_styling(latex_options = "striped") %>%
        column_spec(1, width = "2.5cm") %>%
-       column_spec(7, color = "red")
+       column_spec(4, color = "red")
 @
+
+600 t is just above average recent catch of 547 t
 
 \end{frame}
 
@@ -582,16 +624,18 @@ kable(df, "latex", booktabs = TRUE) %>%
 
 \frametitle{What if results had been the other way around?}
 
+\centering P($B_t$\alert{$\leq$} $0.8 \Bmsy)$, i.e.~stock is \alert{below} healthy zone at start of year $t$
 <<dec-table2, results = "asis">>=
 # Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
 df2 = cbind(df[,1], 1-df[,2:7])
 kable(df2, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
       column_spec(1, width = "2.5cm") %>%
-      column_spec(7, color = "red")
+      column_spec(4, color = "red")
 @
-**mention Tammi - looked at in a different way that I had thought. If quota is 0
-or ** it's not really changing the probability much.
+
+600 t is just above average recent catch of 547 t
+
 
 \end{frame}
 
@@ -600,24 +644,12 @@ or ** it's not really changing the probability much.
 \begin{frame}
 \frametitle{How do fisheries managers use information to make decisions?}
 
+For Pacific Ocean Perch assessments we've tend to give P(in healthy zone) etc.,
 
-However, wonder if same conclusion would be reached if we'd shown it the other
-way around.
+~~i.e. probability of being in a good place (glass half-full).
 
-** DO 1 - table.
+Other assessments tend to show P(being in bad place), e.g. P(below healthy zone)...
 
-** Uncertainty about uncertainty.
-
-** We should be aware of such things.
-
-** I tend to show prob of being in good place (glass half-full). **Think we
-didn't in first assessment, then switched.
-
-**Though we don't actually do that in Pacific Hake, kept with what's been done
-historically (and we show \% signs).
-
-**So -- obviously hard to be consistent across assessments (even our own),
-certainly across the department.
 
 \end{frame}
 %----------------------------------------------------------
@@ -625,12 +657,71 @@ certainly across the department.
 \begin{frame}
 \frametitle{Pacific Hake -- other way round**}
 
+... including Pacific Hake (different type of table -- shows various probabilities
+under different catches for just one year):
+
 \centering
 \includegraphics[height=7.5cm]{images/hake-dec-table.png}
 
 \end{frame}
 
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Beware!!}
+
+So be aware and double check definitions in the tables! 
+
+~\\
+
+No general rule as to which way to do them. 
+
+~\\
+
+Often historical legacy, so can be confusing to change for a particular species
+to create consistency.
+
+**Though we don't actually do that in Pacific Hake, kept with what's been done
+historically (and we show \% signs).
+
+\end{frame}
+
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Beware!!}
+
+Note also the representation of probabilities as \% rather than decimals.
+
+Was preferred by stakeholders.
+
+\centering
+\includegraphics[height=7.5cm]{images/hake-dec-table.png}
+
+
+\end{frame}
+
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{***}
+
+Can show decimals in tables (less clutter) and percentages in text which can
+read more naturally for stakeholders (e.g. Pacific Herring). 
+
+**
+
+
+
+\centering
+\includegraphics[height=7.5cm]{images/hake-dec-table.png}
+
+
+\end{frame}
+
+
 %----------------------------------------------------------
+
 \begin{frame}
 \frametitle{How do fisheries managers use information to make decisions?}
 
@@ -638,8 +729,6 @@ certainly across the department.
 \includegraphics[height=7.5cm]{images/combine-results.png}
 
 \end{frame}
-
-
 
 % ----------------------------------------------------------
 
@@ -835,6 +924,19 @@ lines(thetavec, prior, lwd=3)
 %----------------------------------------------------------
 
 \begin{frame}
+\frametitle{Bayesian figures*** three like before}
+
+Those examples can be done by solving the equations by hand.
+
+Assessment models are way more complicated.
+
+Recent advances, such as Markov Chain Monte Carlo (MCMC) simulations, allow
+us to use the Bayesian approach on complex models.
+
+\end{frame}
+
+%----------------------------------------------------------
+\begin{frame}
 \frametitle{Further types of uncertainty}
 
 \bi
@@ -949,7 +1051,8 @@ So roulette example.....
   assessments; can be hard to change, **show hake one somewhere.)
 \item \alert{``the decision tables gives us the necessary flexibility to assess the risk/impact  of various catch levels''}
 \ei
-
+** Uncertainty about uncertainty.
+**spell check
 \end{frame}
 
 \end{document}
