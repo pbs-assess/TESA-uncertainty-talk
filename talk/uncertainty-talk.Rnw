@@ -92,7 +92,8 @@ opts_chunk$set(dev = 'cairo_ps',
                results = 'hide',
                cache = TRUE,
                cache.path = 'knitr-cache/')
-
+library(dplyr)
+library(xtable)
 assess.yr = 2018
 last.assess.yr = assess.yr - 1
 survey.end.yr = 2017
@@ -104,7 +105,7 @@ admb.version = 999
 
 \title[Uncertainty]{Including uncertainty in advice to managers}
 \author{Andrew Edwards}
-\institute{Pacific Biological Station, Nanaimo, BC 
+\institute{Pacific Biological Station, Nanaimo, BC
   [** add a photo of PBS, or
   a fish, then finalise spacing]}
 \date{{\footnotesize SRG meeting -- \Sexpr{assess.yr}}}
@@ -129,9 +130,9 @@ admb.version = 999
   \item Basic introduction to probability
   \item Types of probabilities we can calculate in assessments
   \item .....
-  \item 
-  \item 
-  \item 
+  \item
+  \item
+  \item
 \ei
 }
 
@@ -151,7 +152,7 @@ admb.version = 999
     \item data synopsis for $>100$ species of British Columbia groundfish
   \ei
   \item Recent research
-  \bi  
+  \bi
     \item methods for fitting size spectra
     \item notation guidelines (in press):
   \ei
@@ -168,7 +169,7 @@ admb.version = 999
 \section{Introduction to probability}
 \subsection{}
 
-\begin{frame}     % AME - not sure if can just use \frame{} everywhere like the 
+\begin{frame}     % AME - not sure if can just use \frame{} everywhere like the
                   %  above slide
 \frametitle{Basics **just have one row for first}
 
@@ -179,7 +180,7 @@ Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<2-3>{0.5} 
                                                                              2 \\
   & & & & \\
 Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<2-3>{0.167} & \textcolor<3>{blue}{16.7\%} & 1 in
-                                                                            6 
+                                                                            6
 \end{tabular}
 
 ~\\
@@ -198,7 +199,7 @@ Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<2-3>{0.167}
 
 %----------------------------------------------------------
 
-\begin{frame}   
+\begin{frame}
 \frametitle{Basics}
 
 Probability is always of \alert{\emph{some event happening}}, for example:
@@ -228,7 +229,7 @@ Other events:
 
 %----------------------------------------------------------
 
-\begin{frame}   
+\begin{frame}
 \frametitle{Basics}
 
 \begin{tabular}{ll}
@@ -241,7 +242,7 @@ P(definite event) = 1 & P(everyone's children got too much candy\\
   & \\
 Everything else is between 0 and 1 & P(it will rain tomorrow at a given location)\\
                                    & P(fish stock is currently in the healthy zone)
-                                     
+
 \end{tabular}
 
 \pause
@@ -281,15 +282,15 @@ P(parameter, given data)
 
 
 \begin{tabular}{ll}
-  
+
  Different data  & Intuition\\
 
 P(coin is fair | H) & coin could well be fair, how can I tell? \\
 
-P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\ 
+P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\
 % Independence
 P(coin is fair | HHHH) & hmmm...., bit suspicious \\
-                         
+
 P(coin is fair | ** Heads) & no way \\
 \end{tabular}
 Rosencratz....
@@ -299,9 +300,14 @@ That's essentially the idea of \emph{likelihood}.
 We have data, and from that we want to infer parameters and then make other
 calculations.
 
-Somewhere: Please don't say `likelihood' when you simply mean `probability'. 
+Somewhere: Please don't say `likelihood' when you simply mean `probability'.
 
 **Somewhere: define mean, median, mode. Maybe earlier.
+
+** Discrete distributions - prob of each event
+
+** We generally end up with continuous distributions, prob of $>$...
+
 \end{frame}
 
 %----------------------------------------------------------
@@ -339,7 +345,7 @@ Slides based on science101andy.ppt ones.
 In assessment models, priors help constrain the model.
 
 I'm most familiar with age-structured models -- if we do not constrain some of the
-parameters then 
+parameters then
 
 it can be hard for the model to be optimised (find the set of parameters that
 are most likely).
@@ -434,7 +440,7 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 \centering
 
 \begin{minipage}{4cm}
-**Estimated ecruitment (1000's of age-1 individuals) through time:
+Spawning biomass up to 2013 (black), and projected spawning biomass (red) based on six values of constant catch, for 2013 to 2023.
 \end{minipage}
 \begin{minipage}{10cm}
 \includegraphics[height=7.5cm]{images/projections.png}
@@ -445,114 +451,156 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Template }
+\frametitle{**Decision tables}
 
-Text...
-\bi
-  \item Bullet
-\ei
+Based on projections:
+
+Probabilities of being in healthy zone for up to 10 years based on different
+levels of \alert{constant} catch.
+
+**Try and use Rowan's code, and use kable to shade nicely. May need to try and
+use the same data.
+
+Else copy ppt one in.
+
+600 t is above average recent catch of 547 t.
+
+Highlight a row.
 
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Template }
+\frametitle{How to fisheries managers use information to make decisions?}
 
-Text...
-\bi
-  \item Bullet
-\ei
+<<dec-table, results = "asis">>=
+# Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
+df = tibble("Annual catch strategy (t)" = seq(0, 1000, 200),
+            "2013" = rep(0.87, 6),
+            "2014" = c(0.88, 0.88, 0.87, 0.86, 0.86, 0.85),
+            "2015" = c(0.90, 0.89, 0.88, 0.86, 0.85, 0.83),
+            "2016" = c(0.92, 0.90, 0.88, 0.86, 0.85, 0.83),
+            "2017" = c(0.93, 0.91, 0.89, 0.87, 0.85, 0.82),
+            "2018" = c(0.94, 0.92, 0.90, 0.87, 0.85, 0.81)
+            )
+#print(kable(df),
+#      format = "latex",
+#      booktabs = TRUE)
+print(xtable(as.data.frame(df)), include.rownames = FALSE)
+# kable(df)
+@
+**mention Tammi - looked at in a different way that I had thought. If quota is 0
+or ** it's not really changing the probability much.
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+  
+\frametitle{What if results had been the other way around?}
+
+<<dec-table2, results = "asis">>=
+# Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
+df2 = cbind(df[,1], 1-df[,2:7])
+print(xtable(as.data.frame(df2)), include.rownames = FALSE)
+@
+**mention Tammi - looked at in a different way that I had thought. If quota is 0
+or ** it's not really changing the probability much.
+
+\end{frame}
+
+% ----------------------------------------------------------
 
 
-\textbf<2>{Example Text}
-\textit<2>{Example Text}
-\textsl<2>{Example Text}
-\textrm<2>{Example Text}
-\textsf<2>{Example Text}
-\textcolor<2>{orange}{Example Text}
-\alert<2>{Example Text}
-\structure<2>{Example Text}
+\begin{frame}
+\frametitle{How to fisheries managers use information to make decisions?}
 
-%\begin{enumerate}[(I)]
-% \alert<1>0.5
-%\end{enumerate}
+
+However, wonder if same conclusion would be reached if we'd shown it the other
+way around.
+
+** DO 1 - table.
+
+** Uncertainty about uncertainty.
+
+** We should be aware of such things.
+
+** I tend to show prob of being in good place (glass half-full). **Think we
+didn't in first assessment, then switched.
+
+**Though we don't actually do that in Pacific Hake, kept with what's been done
+historically (and we show \% signs).
+
+**So -- obviously hard to be consistent across assessments (even our own),
+certainly across the department.
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{How to fisheries managers use information to make decisions?}
+
+\centering
+\includegraphics[height=7.5cm]{images/combine-results.png}
 
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Changes from \Sexpr{last.assess.yr} assessment}
+\frametitle{Further types of uncertainty}
 
-Stock Synthesis version \Sexpr{ss.version} (updated from 3.24U):
 \bi
-  \item Behind-the-scenes changes and new features.
-  \item Extensively tested prior to release.
-  \item Used in at least six assessments in 2017.
-  \item However, time-varying parameters can no longer have a logistic
-    transformation -- changed because interpretation of the parameter values was
-    previously difficult and appropriate parameter bounds make the
-    transformation unnecessary.
-  \item Therefore requires a {\em modified} parameterisation for time-varying
-      selectivity.
+\item All these numerical probabilities depend on the \alert{assumptions of the model}
+\item A different model will give different results
+\item One approach (recent Pacific Cod assessment) is to average the decision
+  tables for 10 or so** plausible models to account of uncertainty in picking the
+  \alert{`best'} model
+\item **discuss with Rob. Risk, could then segway into risk
 \ei
+
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Time-varying fishery selectivity ($\phi$)}
+\frametitle{Risk}
 
-\bi
-  \item Used since 2014 assessment.
-  \item Deviations are applied to selectivity-at-age parameters.
-  \item Normally-distributed penalty function applied to keep deviations
-    straying too far from zero.
-  \item Deviation is controlled by fixed standard deviation parameter $\phi$.
-  ~\\
-  \item In 2017 we used $\phi=0.20$, an increase from previous $\phi=0.03$.
-    In 2017 this greater deviation (more flexibility) was used because:
-    \bi
-      \item The large proportion of 2014 cohort in 2016 age data (age-2 fish)
-        meant that $\phi=0.03$ produced implausible estimates of 2014 recruitment
-        (about three times larger than 1999 and 2010 recruitments).
-      \item $\phi=0.03$ estimates of 2014 recruitment were inconsistent
-        with the qualitative comparison to the age-1 index.
-      \item Good performance of higher $\phi$ in past MSE work.
-    \ei
-\ei
+You might hear ``the risk of being in the cautious zone''
+
+~~but not ``the risk of being in the healthy zone''
+
+`Risk' is associated with a negative consequence:
+
+\bc
+\alert``chance or possibility of danger, loss, injury etc.'' (OED)
+\ec
+
+It does not mean probability -- you would not say ``the risk of getting heads''.
+
+The outcome is part of the definition of risk.
+
+Bet on one number in roulette. Probability of winning is the same whether you
+bet \$5 or \$100,000.
+
+But betting \$100,000 intuitively sounds riskier -- that's because the negative
+outcome (of losing) is more serious than just losing \$5.
+
+**chat with Rob
+
+
 \end{frame}
-
-
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Time-varying fishery selectivity ($\phi$ becomes $\Phi$)}
+\frametitle{**Template}
 
-\bi
-  \item Previously-used logistic transformation not available in Stock Synthesis
-    3.30 (and proved unnecessary as bounds were not approached).
-  \item Deviations now applied directly to the un-transformed incremental
-    selectivity parameters $p_a$ (page~41).
-  \item We define $\Phi$ to be the standard deviation of the normally-distributed
-    penalty distribution of the deviations.
-  \item Based on the previous bounds, equivalent flexibility was found
-    to occur with
-    \begin{equation}
-    \nonumber \Phi = 7 \phi
-    \end{equation}
-  \item So $\Phi = 1.40$ has equivalent flexibility to $\phi=0.20$.
-  \item This is a technical update, not really a structural change (is included
-    in first bridging step).
-  \item Different values of $\Phi$ will be explored.
-\ei
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Bridging to the base model: update SS and
-    pre-\Sexpr{assess.yr-1} data}
+\frametitle{**Example figs with mfrow}
   \bc
   \vspace{-5pt}
   <<bridge.biomass, fig.height=5, fig.width=10, out.width='0.95\\columnwidth'>>=
@@ -565,46 +613,33 @@ Stock Synthesis version \Sexpr{ss.version} (updated from 3.24U):
 \end{frame}
 
 %----------------------------------------------------------
-
 \begin{frame}
-\frametitle{New approach to weighting age-composition data}
+
+\frametitle{Concluding remarks (from my groundfish experience)}
 
 \bi
-  \item 2017 (and earlier) assessments used:
-  \bi
-    \item multinomial likelihood function;
-    \item tuning method for weighting age composition data, by manually iteratively
-      adjusting a multiplier of the input sample sizes until they
-      roughly equal the harmonic mean of the effective sample sizes
-      (McAllister \& Ianelli, 1997).
-  \ei
-  ~\\
-  \item Here use a new Dirichlet-Multinomial likelihood (Thorson et al.,
-    {\em Fisheries Research}, 2017):
-  \bi
-    \item Estimated parameter, $\theta$, automatically adjusts the weight given to
-       the composition data.
-    \item Removes need for manual iterative reweighting (and the subjective
-      choice of how many iterations to do).
-    \item Ensures results of model sensitivities, retrospective analyses,
-       and likelihood profiles are all automatically tuned, rather than having
-       same weights as the base model.
-    \item Increases efficiency of the assessment process.
-    \item Was tested on a simplified version of the 2015 hake assessment model.
-    \item We estimate $\theta_{\text{surv}}$ and $\theta_{\text{fish}}$.
-  \ei
+\item Giving explicit uncertainties is appreciated
+\item Complex results incorporating Bayesian uncertainty can be meaningfully communicated to managers \& stakeholders through clear figures and tables
+\item  \alert{``Far more useful than low/medium/high elements of risk that we used to get''}
+\item Consistency in layout of results and tables is appreciated (**caveats - we
+  generally do this when updating assessments, not necessarily between
+  assessments; can be hard to change, **show hake one somewhere.)
+\item \alert{``the decision tables gives us the necessary flexibility to assess the risk/impact  of various catch levels''}
 \ei
-\end{frame}
 
-%----------------------------------------------------------
-
-\section{Ooh -- a colour figure!}
-\begin{frame}
-\frametitle{Bridging to the base model: fishery and survey data}
-  \bc
-  % Replacing knitr chunk with resulting figures
-  \includegraphics[height=3in]{images/bridge_biomass2-1.eps}
-  \ec
 \end{frame}
 
 \end{document}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Template}
+
+Further reading/viewing:
+
+David Spiegelhalter (Winton Professor for the Public Understanding of Risk, Cambridge).
+
+``Transparent evidence designed to inform, not to persuade''
+
+\end{frame}
