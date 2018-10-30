@@ -2,7 +2,8 @@
 %\documentclass[draft]{beamer}
 %\documentclass[notesonly]{beamer}
 %\documentclass[notes]{beamer}
-\documentclass[aspectratio=169, xcolor=table]{beamer}
+\documentclass[aspectratio=169, xcolor=table]{beamer}  % xcolor to avoid conflict
+                                                       %  with beamer
 \mode<presentation>
 \usetheme{Singapore} %Berkeley, Palo Alto, Singapore, Warsaw
 %\usecolortheme{seagull}  %Beaver, dolphin, dove, lily, orchid, seagull, seahorse
@@ -40,6 +41,7 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 
+\usepackage[export]{adjustbox}     % for left and right in \includegraphics
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 %% syntax is \mlc{first line\\secondline}
@@ -180,7 +182,7 @@ admb.version = 999
 \ei
 \medskip
 %\hfill
-~~~\includegraphics[width=12cm]{images/notation-header.png}
+~~~\includegraphics[width=10cm]{images/notation-header.png}
 % \vskip10pt
 \end{frame}
 
@@ -190,31 +192,31 @@ admb.version = 999
 \section{Introduction to probability}
 \subsection{}
 
-\begin{frame}     % AME - not sure if can just use \frame{} everywhere like the
-                  %  above slide
-\frametitle{Basics **just have one row for first}
+\begin{frame}
+\frametitle{Basics}
+
+\includegraphics[height=1.5cm, right]{images/coin-toss.png}
 
 \begin{tabular}{lrrrr}
   & Fraction & Decimal & Percentage & Odds \\
   & & & & \\
-Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<2-3>{0.5} & \textcolor<3>{blue}{50\%} & 1 in
+Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} & \textcolor<4>{blue}{50\%} & 1 in
                                                                              2 \\
   & & & & \\
-Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<2-3>{0.167} & \textcolor<3>{blue}{16.7\%} & 1 in
+\onslide<2->Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<3-4>{0.167} & \textcolor<4>{blue}{16.7\%} & 1 in
                                                                             6
 \end{tabular}
+\includegraphics<2->[height=1cm, right]{images/die-roll.png}
 
-~\\
+% \begin{minipage}{8cm}
+\onslide<3-4>\alert{~~Easier to use in calculations}
+\onslide<4>\rightline{\textcolor{blue}{May be more easily understood by stakeholders}}
+% end{minipage}
 
-~\\
-
-~\\
-
-\onslide<2-3>\alert{~~~~~~~~Easier to use in calculations}\\
-
-~\\
-
-\onslide<3>\textcolor{blue}{~~~~~~~~Maybe more easily understood by stakeholders}
+%\begin{minipage}{1.5cm}
+% \includegraphics<2-4>[height=1.5cm, right]{images/die-roll.png}
+% 
+% \end{minipage}
 
 \end{frame}
 
@@ -254,32 +256,31 @@ Other events:
 \frametitle{Basics}
 
 \begin{tabular}{ll}
-  & Examples \\
+  & \textcolor{blue}{Examples} \\
   & \\
-P(impossible event) = 0 & P(standard die gives a 7) \\
+P(impossible event) = 0 & \textcolor{blue}{P(standard die gives a 7)} \\
   & \\
-P(definite event) = 1 & P(everyone's children got too much candy\\
-  &                       ~~~~trick-or-treating last night) \\
+P(definite event) = 1 & \textcolor{blue}{P(everyone's children got too much candy}\\
+  &                     \textcolor{blue}{~~~~trick-or-treating last night)} \\
   & \\
-Everything else is between 0 and 1 & P(it will rain tomorrow at a given location)\\
-                                   & P(fish stock is currently in the healthy zone)
-
+Everything else is between 0 and 1 & \textcolor{blue}{P(it will rain tomorrow at a given location)}\\
+                                   & \textcolor{blue}{P(fish stock is currently in the healthy zone)}
 \end{tabular}
 
 \pause
 
 ~\\
 
-Probabilities of all possible events add up to 1.
+~\\
 
-P(heads) = 0.5
-
-P(tails) = 0.5
-
-P(heads) $+$ P(tails) = 1~~ (the coin must lands on heads or tails)
-
+Probabilities of \textcolor{red}{all possible events} add up to 1:
+\begin{eqnarray}
+\nonumber \mbox{P(heads)} & = & 0.5\\
+\nonumber \mbox{P(tails)} & = & 0.5\\
+\nonumber \mbox{P(heads)} + \mbox{P(tails)} & = & 1 
+\end{eqnarray}
 \end{frame}
-
+%                            (the coin must lands on heads or tails)
 %----------------------------------------------------------
 
 \begin{frame}
@@ -457,7 +458,6 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 \begin{frame}
 \frametitle{Going forward -- projections}
 
-
 \centering
 
 \begin{minipage}{4cm}
@@ -484,7 +484,6 @@ use the same data.
 
 Else copy ppt one in.
 
-600 t is above average recent catch of 547 t.
 
 Highlight a row.
 
@@ -504,17 +503,46 @@ df = tibble("Annual catch strategy (t)" = seq(0, 1000, 200),
             "2017" = c(0.93, 0.91, 0.89, 0.87, 0.85, 0.82),
             "2018" = c(0.94, 0.92, 0.90, 0.87, 0.85, 0.81)
             )
-#print(kable(df),
-#      format = "latex",
-#      booktabs = TRUE)
-print(xtable(as.data.frame(df)), include.rownames = FALSE)
-# kable(df)
+kable(df, "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped") %>%
+      column_spec(1, width = "3cm")
 @
 **mention Tammi - looked at in a different way that I had thought. If quota is 0
 or ** it's not really changing the probability much.
 
 \end{frame}
+
 %----------------------------------------------------------
+
+\begin{frame}
+\frametitle{How to fisheries managers use information to make decisions?}
+
+<<dec-table4, results = "asis">>=
+kable(df, "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped") %>%
+      row_spec(4, color = "red")
+@
+
+600 t is just above average recent catch of 547 t
+
+\end{frame}
+
+
+% ----------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Fisheries manager had another interpretation}
+
+<<dec-table3, results = "asis">>=
+ kable(df, "latex", booktabs = TRUE) %>%
+       kable_styling(latex_options = "striped") %>%
+       column_spec(7, color = "red")
+@
+
+\end{frame}
+
+% ----------------------------------------------------------
 
 \begin{frame}
 
@@ -523,28 +551,15 @@ or ** it's not really changing the probability much.
 <<dec-table2, results = "asis">>=
 # Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
 df2 = cbind(df[,1], 1-df[,2:7])
-print(xtable(as.data.frame(df2)), include.rownames = FALSE)
+kable(df2, "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped") %>%
+      column_spec(7, color = "red")
 @
 **mention Tammi - looked at in a different way that I had thought. If quota is 0
 or ** it's not really changing the probability much.
 
 \end{frame}
 
-% ----------------------------------------------------------
-
-
-\begin{frame}
-\frametitle{**Try kable again}
-
-Nope, get conflict with xcolor
-
-<<dec-table3, results = "asis">>=
- kable(df, "latex", booktabs = TRUE) %>%
-    kable_styling(latex_options = "striped")
-@
-
-
-\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
@@ -572,6 +587,15 @@ certainly across the department.
 \end{frame}
 %----------------------------------------------------------
 
+\begin{frame}
+\frametitle{Pacific Hake -- other way round**}
+
+\centering
+\includegraphics[height=7.5cm]{images/hake-dec-table.png}
+
+\end{frame}
+
+%----------------------------------------------------------
 \begin{frame}
 \frametitle{How to fisheries managers use information to make decisions?}
 
