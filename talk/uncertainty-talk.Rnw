@@ -131,11 +131,11 @@ admb.version = 999
 
 \title[Uncertainty]{Including uncertainty in advice to managers}
 \author{Andrew Edwards}
-\institute{Pacific Biological Station, Nanaimo, BC
-  [** add a photo of PBS, or
-  a fish, then finalise spacing]}
+\institute{Pacific Biological Station, Nanaimo, BC**fix\\
+  \includegraphics[height=3.5cm]{images/pbs.png}}
 \date{{\footnotesize SRG meeting -- \Sexpr{assess.yr}}}
-\subtitle{\small Lecture 5 of TESA's Introduction to Stock Assessment WebEx series.}
+\subtitle{\small Lecture 5 of TESA's \emph{Introduction to Stock Assessment} WebEx series.\\
+Thursday 1st November, 2018}
 
 \begin{document}
 
@@ -154,11 +154,18 @@ admb.version = 999
 \frame{\frametitle{**Outline}
 \bi
   \item Basic introduction to probability
-  \item Types of probabilities we can calculate in assessments
-  \item .....
-  \item
-  \item
-  \item
+  \item Examples of probabilities that we can calculate in assessments
+  \item Communicating uncertainty
+  \bi 
+    \item Stock status
+    \item Projections
+    \item Decision tables
+  \ei
+  \item Brief details of how probabilities get calculated
+  \item Bayesian analysis
+  \item Other sources of uncertainty
+  \item Risk
+  \item Concluding remarks
 \ei
 }
 
@@ -169,15 +176,15 @@ admb.version = 999
 \frametitle{About me **add photo}
 
 \bi
-  \item Research Scientist at Pacific Biological Station since 2007
-  \item Previously worked at Bedford Institute of Oceanography \& Dalhousie
-  \item Stock assessment work
+  \item Pacific Biological Station since 2007
+  \item Previously at Bedford Institute of Oceanography \& Dalhousie
+  \item Stock assessment work:
   \bi
     \item rockfish (long-lived, good age data)
     \item Pacific Hake (joint with U.S. colleagues)
     \item data synopsis for $>100$ species of British Columbia groundfish
   \ei
-  \item Recent research
+  \item Recent research:
   \bi
     \item methods for fitting size spectra
     \item notation guidelines (in press):
@@ -185,6 +192,7 @@ admb.version = 999
 \ei
 \medskip
 %\hfill
+\pause
 ~~~\includegraphics[width=10cm]{images/notation-header.png}
 % \vskip10pt
 \end{frame}
@@ -203,13 +211,13 @@ admb.version = 999
 \begin{tabular}{lrrrr}
   & Fraction & Decimal & Percentage & Odds \\
   & & & & \\
-Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} & \textcolor<4>{blue}{50\%} & 1 in
-                                                                             2 \\
+Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} & 
+  \textcolor<4>{blue}{50\%} & 1 in 2 \\
   & & & & \\
-\onslide<2->Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & \alert<3-4>{0.167} & \textcolor<4>{blue}{16.7\%} & 1 in
-                                                                            6
+\onslide<2->Probability that a rolled die gives a six: & $\dfrac{1}{6}$ & 
+  \alert<3-4>{0.167} & \textcolor<4>{blue}{16.7\%} & 1 in 6
 \end{tabular}
-\includegraphics<2->[height=1cm, right]{images/die-roll.png}
+\includegraphics<2-4>[height=1cm, right]{images/die-roll.png}
 
 % \begin{minipage}{8cm}
 \onslide<3-4>\alert{~~Easier to use in calculations}
@@ -259,8 +267,9 @@ Other events:
 \frametitle{Introduction to probability}
 
 \begin{tabular}{ll}
-  & \textcolor{blue}{Examples} \\
   & \\
+Values of probabilities  & Examples \\
+  \hline
 P(impossible event) = 0 & \textcolor{blue}{P(standard die gives a 7)} \\
   & \\
 P(definite event) = 1 & \textcolor{blue}{P(everyone's children got too much candy}\\
@@ -289,7 +298,38 @@ Probabilities of \textcolor{red}{all possible events} add up to 1:
 \begin{frame}
 \frametitle{Do discrete values (easy), cts (harder)}
 
-Cts - can only talk about P(X $\leq$3). etc. 
+Die rolls -- can only take \alert{discrete} values: 1, 2, 3, 4, 5 or 6.
+
+Count data are \alert{discrete} and take whole numbers:
+
+~~e.g. annual numbers of lynx trappings for 1821-1934 in Canada:
+
+~~269,  321,  585,  871, 1475, 2821, 3928, 5943, 4950, 2577, ...
+
+% lynx[1:10]
+
+~\\
+
+But many measured values are \alert{continuous} (can take any value).
+
+Temperature is continuous, though measured values are discrete (due to the
+precision of the instrument).
+
+~~e.g. body temperature of a beaver at 10-minute intervals
+
+<<beaver, results="asis">>=
+kable(beaver1[1:6, 2:3], "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped")
+      # column_spec(1, width = "3cm")
+@
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Communicating uncertainty}
+
+Cts - can only talk about P(X $\leq$3). etc.
 
 Histograms.
 
@@ -298,7 +338,7 @@ pdf maybe
 Results are distributions.
 
 Show results, then will explain some of the methods used to get results (mention
-Bayes etc. at start). 
+Bayes etc. at start).
 
 \end{frame}
 %----------------------------------------------------------
@@ -400,6 +440,8 @@ Spawning biomass up to 2013 (black), and projected spawning biomass (red) based 
 \begin{frame}
 \frametitle{**Decision tables}
 
+In fisheries science, a decision table presents potential consequences of different decisions, and is used to help facilitate decision making.
+
 Based on projections:
 
 Probabilities of being in healthy zone for up to 10 years based on different
@@ -417,22 +459,22 @@ Highlight a row.
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How to fisheries managers use information to make decisions?}
+\frametitle{How do fisheries managers use information to make decisions?}
 
 <<dec-table, results = "asis">>=
 # Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
 #  Changing years to avoid confusion that it's projections
 df = tibble("Annual catch strategy (t)" = seq(0, 1000, 200),
-            "2018" = rep(0.87, 6),
-            "2019" = c(0.88, 0.88, 0.87, 0.86, 0.86, 0.85),
-            "2020" = c(0.90, 0.89, 0.88, 0.86, 0.85, 0.83),
-            "2021" = c(0.92, 0.90, 0.88, 0.86, 0.85, 0.83),
-            "2022" = c(0.93, 0.91, 0.89, 0.87, 0.85, 0.82),
-            "2023" = c(0.94, 0.92, 0.90, 0.87, 0.85, 0.81)
+            "2013" = rep(0.87, 6),
+            "2014" = c(0.88, 0.88, 0.87, 0.86, 0.86, 0.85),
+            "2015" = c(0.90, 0.89, 0.88, 0.86, 0.85, 0.83),
+            "2016" = c(0.92, 0.90, 0.88, 0.86, 0.85, 0.83),
+            "2017" = c(0.93, 0.91, 0.89, 0.87, 0.85, 0.82),
+            "2018" = c(0.94, 0.92, 0.90, 0.87, 0.85, 0.81)
             )
 kable(df, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
-      column_spec(1, width = "3cm")
+      column_spec(1, width = "2.5cm")
 @
 **mention Tammi - looked at in a different way that I had thought. If quota is 0
 or ** it's not really changing the probability much.
@@ -442,11 +484,12 @@ or ** it's not really changing the probability much.
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How to fisheries managers use information to make decisions?}
+\frametitle{How do fisheries managers use information to make decisions?}
 
 <<dec-table4, results = "asis">>=
 kable(df, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
+      column_spec(1, width = "2.5cm") %>%
       row_spec(4, color = "red")
 @
 
@@ -464,6 +507,7 @@ kable(df, "latex", booktabs = TRUE) %>%
 <<dec-table3, results = "asis">>=
  kable(df, "latex", booktabs = TRUE) %>%
        kable_styling(latex_options = "striped") %>%
+       column_spec(1, width = "2.5cm") %>%
        column_spec(7, color = "red")
 @
 
@@ -480,6 +524,7 @@ kable(df, "latex", booktabs = TRUE) %>%
 df2 = cbind(df[,1], 1-df[,2:7])
 kable(df2, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
+      column_spec(1, width = "2.5cm") %>%
       column_spec(7, color = "red")
 @
 **mention Tammi - looked at in a different way that I had thought. If quota is 0
@@ -490,7 +535,7 @@ or ** it's not really changing the probability much.
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How to fisheries managers use information to make decisions?}
+\frametitle{How do fisheries managers use information to make decisions?}
 
 
 However, wonder if same conclusion would be reached if we'd shown it the other
@@ -524,7 +569,7 @@ certainly across the department.
 
 %----------------------------------------------------------
 \begin{frame}
-\frametitle{How to fisheries managers use information to make decisions?}
+\frametitle{How do fisheries managers use information to make decisions?}
 
 \centering
 \includegraphics[height=7.5cm]{images/combine-results.png}
@@ -536,10 +581,13 @@ certainly across the department.
 % ----------------------------------------------------------
 
 \begin{frame}
-\frametitle{What about the other way round?}
+\frametitle{So how do we obtain these probabilities?}
 
-**May well move to after some results - motivation for how do we do these
-calculations. If move then repeat an earlier slide.
+Helpful for everyone to understand the ideas behind calculating these
+probabilities (and why people in assessment review meetings spend so much time
+talking about those damn priors).
+
+~\\
 
 Back to coin tossing:
 \begin{eqnarray}
@@ -549,10 +597,22 @@ Back to coin tossing:
 \end{eqnarray}
 
 That tells us the \alert{probability of different outcomes} (heads or tails), given
-\textcolor{blue}{knowledge of how the system works} (the coin is fair and so the probabilities are equal).
+\textcolor{blue}{knowledge of how the system works (the coin is fair, and so the probabilities are equal)}.
+
+~\\
 
 But often, we have \alert{data concerning different outcomes}, and want to
-\textcolor{blue}{infer how the system works}.
+\textcolor{blue}{infer how the system works -- what are the probabilities (is
+  the coin fair?)}.
+
+~\\
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**}
 
 We have a coin, and what to know if it is fair or not?
 
@@ -562,7 +622,8 @@ P(heads, given we know it is a fair coin)
 
 P(event, given parameter)
 
-Often we want the other way round
+
+**Often we want the other way round
 
 
 P(parameter, given event)
@@ -667,9 +728,37 @@ This approach then allows us to calculate the probability of events.
 \begin{frame}
 \frametitle{Risk}
 
-You might hear ``the risk of being in the cautious zone''
+\begin{minipage}{8cm}
+Which is more risky?
+\bi
+ \item betting \$100,000 on one number in roulette, or
+ \item betting \$5 on one number in roulette.
+\ei
+\end{minipage}
+\begin{minipage}{4cm}
+  \includegraphics[width=4cm, right]{images/roulette.png}
+\end{minipage}
 
-~~but not ``the risk of being in the healthy zone''
+\pause
+
+~\\
+
+~\\
+
+Intuitively, the \$100,000 bet sounds riskier -- that's because the negative
+outcome (of losing) is more serious than losing just \$5.
+
+~\\
+
+But the \alert{\emph{probabilities of winning}} are the same (regardless of the bet).
+
+~\\
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**risk}
 
 `Risk' is associated with a negative consequence:
 
@@ -681,22 +770,28 @@ It does not mean probability -- you would not say ``the risk of getting heads''.
 
 The outcome is part of the definition of risk.
 
-Bet on one number in roulette. Probability of winning is the same whether you
-bet \$5 or \$100,000.
+You might hear ``the risk of being in the cautious zone''
 
-But betting \$100,000 intuitively sounds riskier -- that's because the negative
-outcome (of losing) is more serious than just losing \$5.
+~~but not ``the risk of being in the healthy zone''
 
-**chat with Rob
+More formally, we would associate it with a probability **need definition** Rob?
+
+Quantitatively, risk is the \alert``expected value of an undesirable outcome''. 
+
+Prob outcome $\times$ expected loss if outcome occurs
+
+So roulette example.....
+
 
 
 \end{frame}
-%----------------------------------------------------------
+
+% ----------------------------------------------------------
 
 \begin{frame}
 \frametitle{**Template}
 
-\includegraphics[width=4cm, right]{images/roulette.png}
+
 
 \end{frame}
 
