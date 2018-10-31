@@ -362,7 +362,7 @@ plot(as.factor(rolls), xlab="Number on die", ylab="Count", ylim=c(0,100))
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**}
+\frametitle{Discrete outcomes}
 
 Similarly, count data are \alert{discrete} and take whole numbers.
 
@@ -495,9 +495,9 @@ as
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Communicating uncertainty}
+\frametitle{Continuous variables}
 
-For real data, this would involve fitting a model:
+To calculate probabilities, would first involve fitting a model:
 
 <<hist-simp-2, fig.height=2.0>>=
 set.seed(42)
@@ -515,7 +515,7 @@ lines(xvals, yvals*500*6, col="red", lwd=3) # 6 is width/breaks
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Communicating uncertainty}
+\frametitle{Continuous variables}
 
 Now we have a model, we can ask questions:
 
@@ -543,7 +543,7 @@ What is the probability that a random fish weighs $>$120~g?
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Communicating uncertainty}
+\frametitle{Continuous variables}
 
 Now we have a model, we can ask questions:
 
@@ -571,7 +571,7 @@ P(fish weight $>$120~g) is the \textcolor{blue}{area shaded in blue}.
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Communicating uncertainty}
+\frametitle{Continuous variables}
 
 Now we have a model, we can ask questions:
 
