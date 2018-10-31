@@ -174,13 +174,22 @@ Thursday 1st November, 2018}
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{About me **add photo}
+\frametitle{About me}
+~\\
 
+\begin{minipage}{12cm}
 \bi
   \item Pacific Biological Station since 2007
   \item Previously at Bedford Institute of Oceanography \& Dalhousie
-  \item Stock assessment work:
-  \bi
+\ei
+\end{minipage}
+\begin{minipage}{2cm}
+  \includegraphics[width=1.3cm, right]{images/andyCrop2.jpg}
+\end{minipage}
+
+\bi
+  \item Stock assessment work:    
+    \bi
     \item rockfish (long-lived, good age data)
     \item Pacific Hake (joint with U.S. colleagues)
     \item data synopsis for $>100$ species of British Columbia groundfish
@@ -643,11 +652,13 @@ kable(df2, "latex", booktabs = TRUE) %>%
 \begin{frame}
 \frametitle{How do fisheries managers use information to make decisions?}
 
-For Pacific Ocean Perch assessments we've tend to give P(in healthy zone) etc.,
+For Pacific Ocean Perch assessments we have tended to give P(in healthy zone) etc.,
 
 ~~i.e. probability of being in a good place (glass half-full).
 
-Other assessments tend to show P(being in bad place), e.g. P(below healthy zone)...
+~\\
+
+Other assessments tend to show P(being in bad place), e.g. P(below healthy zone).
 
 
 \end{frame}
@@ -656,7 +667,7 @@ Other assessments tend to show P(being in bad place), e.g. P(below healthy zone)
 \begin{frame}
 \frametitle{Pacific Hake -- other way round**}
 
-... including Pacific Hake (different type of table -- shows various probabilities
+Pacific Hake (different type of table -- shows various probabilities
 under different catches for just one year):
 
 \centering
@@ -762,7 +773,7 @@ But often, we have \alert{data concerning different outcomes}, and want to
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**}
+\frametitle{Likelihood}
 
 But often, we have \alert{data concerning different outcomes}, and want to
 \textcolor{blue}{infer how the system works -- what are the probabilities (is
@@ -786,29 +797,25 @@ e.g. P(rains tomorrow | rains today)
 
 \begin{tabular}{ll}
 
- Different data  & Intuition\\
+\underline{Different results}  & \underline{Intuition}\\
 
 P(coin is fair | H) & coin could well be fair, how can I tell? \\
 
+\pause
 P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\
 % Independence
+\pause
+  
 P(coin is fair | HHHH) & hmmm...., bit suspicious \\
-
+\pause
+  
 P(coin is fair | 100 H in a row) & absolutely no way \\
 \end{tabular}
+\pause
 
-That's essentially the idea of \emph{likelihood}.
+~\\
 
-We have data, and from that we want to infer parameters and then make other
-calculations.
-
-Somewhere: Please don't say `likelihood' when you simply mean `probability'.
-
-**Somewhere: define mean, median, mode. Maybe earlier.
-
-** Discrete distributions - prob of each event
-
-** We generally end up with continuous distributions, prob of $>$...
+That's essentially the idea of \alert{\emph{likelihood}}.
 
 \end{frame}
 
@@ -817,12 +824,55 @@ Somewhere: Please don't say `likelihood' when you simply mean `probability'.
 \begin{frame}
 \frametitle{Likelihood}
 
+So instead of 
+
+~\\
+
+~~P(\textcolor{blue}{data} | \textcolor{red}{coin is fair}),
+
+~\\
+
+likelihood is essentially
+
+~\\
+
+~~P(\textcolor{red}{coin is fair} | \textcolor{blue}{data}).
+
+~\\
+
+%We have data and want to infer whether the coin is fair (whether the underlying probability
+%of getting a H, $p$, is 0.5).
+
+%~\\
+
+%~~P(\textcolor{red}{$p = 0.5$} | \textcolor{blue}{data}).
+
+%~\\
+
+\pause
+
+Similarly, we have fisheries data and want to infer parameters and  make other
+calculations, essentially to calculate
+
+~~P(\textcolor{red}{stock in healthy zone} | \textcolor{blue}{data on catches,
+  growth, etc.}).
+
+\end{frame}
+%----------------------------------------------------------
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**}
+
 Likelihood allows us to use a mathematical model estimate
 
 ~~P(stock is in the healthy zone | data)
 
 In practice we often need to use a \emph{Bayesian} approach, due to complexity
 of models
+
+**Somewhere: Please don't say `likelihood' when you simply mean `probability'.
 
 \end{frame}
 %----------------------------------------------------------
@@ -834,27 +884,6 @@ of models
 
 Involves using \emph{prior} information and combining it with the
 \emph{likelihood} of the data to give a \emph{posterior}.
-
-Example -- want to estimate the proportion of vehicles (bikes and cars) going
-down a street that are bikes.
-
-Call this proportion $p$.
-
-Your prior `belief' is that $p$ is around 0.2, but you're not really sure.
-
-....**Do decision tables first**
-
-Slides based on science101andy.ppt ones.
-
-In assessment models, priors help constrain the model.
-
-I'm most familiar with age-structured models -- if we do not constrain some of the
-parameters then
-
-it can be hard for the model to be optimised (find the set of parameters that
-are most likely).
-
-This approach then allows us to calculate the probability of events.
 
 \end{frame}
 
@@ -982,19 +1011,38 @@ hake. these are what he have but then can aggregate to show boxplots.
 
 **Hake Fig 23 or 29.
 
+In assessment models, priors help constrain the model.
+
+I'm most familiar with age-structured models -- if we do not constrain some of the
+parameters then
+
+it can be hard for the model to be optimised (find the set of parameters that
+are most likely).
+
+This approach then allows us to calculate the probability of events.
+
+
 \end{frame}
 
 %----------------------------------------------------------
 \begin{frame}
 \frametitle{Further types of uncertainty}
 
+\bc
+  {\Huge \bf \alert{BIG CAVEAT}}
+\ec
+
 \bi
 \item All these numerical probabilities depend on the \alert{assumptions of the model}
 \item A different model will give different results
+\item Model is the best we can do
+\item Model gives \alert{projections} based on assumptions being valid and
+  continuing to be valid, not \textcolor{blue}{predictions}.
+  
 \item One approach (recent Pacific Cod assessment) is to average the decision
   tables for 10 or so** plausible models to account of uncertainty in picking the
-  \alert{`best'} model
-\item **discuss with Rob. Risk, could then segway into risk
+  \alert{`best'} model **See what Rob things ;)
+\item **discuss with Rob, Carrie. Risk, could then segway into risk
 \ei
 
 \end{frame}
