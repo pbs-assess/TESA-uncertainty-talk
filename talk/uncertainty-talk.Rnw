@@ -188,7 +188,7 @@ Thursday 1st November, 2018}
 \end{minipage}
 
 \bi
-  \item Stock assessment work:    
+  \item Stock assessment work:
     \bi
     \item rockfish (long-lived, good age data)
     \item Pacific Hake (joint with U.S. colleagues)
@@ -356,7 +356,7 @@ Take those first 11 years and sort into order:
 \onslide<2-> \alert{Median} is the value in the middle
 
 \onslide<3-> \textcolor{blue}{Mean} is 2205.7, the total divided by 11.
- 
+
 \end{frame}
 %----------------------------------------------------------
 
@@ -764,7 +764,7 @@ read more naturally for stakeholders (e.g. Pacific Herring).
 \frametitle{So how do we obtain these probabilities?}
 
 Helpful to understand the ideas behind calculating these
-probabilities 
+probabilities
 (and why people in assessment review meetings spend so much time
 talking about those damn `priors').
 
@@ -823,10 +823,10 @@ P(coin is fair | H) & coin could well be fair, how can I tell? \\
 P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting HH)\\
 % Independence
 \pause
-  
+
 P(coin is fair | HHHH) & hmmm...., bit suspicious \\
 \pause
-  
+
 P(coin is fair | 100 H in a row) & absolutely no way \\
 \end{tabular}
 \pause
@@ -842,7 +842,7 @@ That's essentially the idea of \alert{\emph{likelihood}}.
 \begin{frame}
 \frametitle{Likelihood}
 
-So instead of 
+So instead of
 
 ~\\
 
@@ -858,6 +858,11 @@ likelihood is essentially
 
 ~\\
 
+Technically, we would define $p$ as the underlying true probability of getting H in a single toss.
+
+If $p$ `is close to' 0.5 then we would say the coin is fair.
+
+
 %We have data and want to infer whether the coin is fair (whether the underlying probability
 %of getting a H, $p$, is 0.5).
 
@@ -867,21 +872,135 @@ likelihood is essentially
 
 %~\\
 
-\pause
-
-Similarly, we have fisheries data and want to infer parameters and  make other
-calculations, essentially to calculate
-
-~~P(\textcolor{red}{stock in healthy zone} | \textcolor{blue}{data on catches,
-  growth, etc.}).
-
 \end{frame}
 %----------------------------------------------------------
 
 %----------------------------------------------------------
 
 \begin{frame}
+\frametitle{Likelihood}
+
+\begin{center}
+<<like-fig-1, out.width='0.75\\columnwidth', fig.height=4>>=
+# Keeping function here, but ended up copy and pasting old slides for speed
+
+# Do for tossed coins:
+like_fig <- function(choice)
+    {
+    nvec = c(1, 2, 5,20,100)			# n tosses
+    svec = nvec   #c(5,20,100)     		# s heads
+
+    # choice is 1, 2, 3
+    n = nvec[choice]
+    s = svec[choice]
+
+    thetavec = seq(0.01,1,0.001)	# theta is prob of H (p in slides)
+
+    # prior = dbeta(thetavec, 2,6.4)
+    L = thetavec^s * (1 - thetavec)^(n-s)
+    # post = dbeta(thetavec, 2+s, 6.4+n-s)
+
+    # windows(height=3, width=3* 2.2)  # width = 2.2, cmai[2]=0.46 was good with no
+						# label on y axis
+    # cmai=c(0.96, 1.0, 0.77, 0.39) - good for having axes label words, but too
+		 # much white space for no labels (but do want numbers):
+
+    # cmai=c(0.46, 0.46, 0.3, 0.3)
+    cmai=c(1, 1, 0.15, 0.3)
+    par(mai=cmai)
+
+    # par(mfrow=c(1,2), mai=cmai) # , lwd=3)
+
+    tsize = 1.5 * 1.5
+    # ymax = 9  # 1.1*max(post)
+
+    # par(mai=cmai, mfrow=c(1,3))
+    # windows(height=3, width=2.2)   before each if doing individually
+    # par(mai=cmai)		# plotting the normalised L
+
+    plot(thetavec, L/sum(L)*1000, col="blue", type="h",
+         xlim=c(0,1), xaxs="i",
+         cex.lab=tsize, cex.axis=tsize, lwd=3,
+         xlab=expression(Value~of~italic(p)),
+         ylab=expression(Likelihood~of~italic(p)),
+         ylim=c(0,1.1* max(L/sum(L)*1000)), yaxs="i")
+    lines(thetavec, L/sum(L)*1000, lwd=3)
+
+#    plot(thetavec, prior, ylim=c(0,ymax ),  col="red", type="h", xlim=c(0,0.8), xaxs="i", yaxs="i",
+#         cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")# , lwd=3) )
+#    lines(thetavec, prior, lwd=3)
+}
+# bayes_fig(1)
+# bayes_fig(2)
+# bayes_fig(3)
+like_fig(1)
+@
+\end{center}
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+\begin{center}
+<<like-fig-2, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(2)
+@
+\end{center}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+\begin{center}
+<<like-fig-3, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(3)
+@
+\end{center}
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+\begin{center}
+<<like-fig-4, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(4)
+@
+\end{center}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+\begin{center}
+<<like-fig-5, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(5)
+@
+\end{center}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
 \frametitle{**}
+
+
+**repetition of below?: Similarly, we have fisheries data and want to infer parameters and  make other
+calculations, essentially to calculate
+
+~~P(\textcolor{red}{stock in healthy zone} | \textcolor{blue}{data on catches,
+  growth, etc.}).
+
+
 
 Likelihood allows us to use a mathematical model estimate
 
@@ -1056,7 +1175,7 @@ This approach then allows us to calculate the probability of events.
 \item Model is the best we can do
 \item Model gives \alert{projections} based on assumptions being valid and
   continuing to be valid, not \textcolor{blue}{predictions}.
-  
+
 \item One approach (recent Pacific Cod assessment) is to average the decision
   tables for 10 or so** plausible models to account of uncertainty in picking the
   \alert{`best'} model **See what Rob things ;)
@@ -1078,7 +1197,7 @@ heads in a row?
 
 \pause
 
-Rosencrantz and Guildenstern Are Dead 
+Rosencrantz and Guildenstern Are Dead
 
 ~\\
 
