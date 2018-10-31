@@ -101,6 +101,7 @@
 \newcommand{\bi}{\begin{itemize}}
 \newcommand{\ei}{\end{itemize}}
 \newcommand{\Bmsy}{B_{MSY}}
+\newcommand{\howlikely}{How likely are different values of $p$ (the underlying probability of getting a head)?}
 %% <<echo=TRUE,  message=TRUE, results='show', warning=TRUE>>=
 %% opts_chunk$set(dev='cairo_ps',fig.path='knitr-cache/', fig.dpi=96, fig.width=7.5,
 %%                fig.height=4, echo=TRUE, results=TRUE, message=TRUE, warning=TRUE,
@@ -850,7 +851,15 @@ So instead of
 
 ~\\
 
-likelihood is essentially
+likelihood is
+
+~\\
+
+~~L(\textcolor{red}{coin is fair} | \textcolor{blue}{data}),
+
+~\\
+
+which is (essentially)
 
 ~\\
 
@@ -858,9 +867,8 @@ likelihood is essentially
 
 ~\\
 
-Technically, we would define $p$ as the underlying true probability of getting H in a single toss.
-
-If $p$ `is close to' 0.5 then we would say the coin is fair.
+Likelihood of \textcolor{red}{hypothesis (coin is fair)} given the
+\textcolor{blue}{data (number of heads)}.
 
 
 %We have data and want to infer whether the coin is fair (whether the underlying probability
@@ -880,19 +888,23 @@ If $p$ `is close to' 0.5 then we would say the coin is fair.
 \begin{frame}
 \frametitle{Likelihood}
 
+We define $p$ as the underlying true probability of getting H in a single toss.
+
+If $p$ `is close to' 0.5 then we would say the coin is fair.
+
+\howlikely
 \begin{center}
 <<like-fig-1, out.width='0.75\\columnwidth', fig.height=4>>=
-# Keeping function here, but ended up copy and pasting old slides for speed
-
 # Do for tossed coins:
-like_fig <- function(choice)
+like_fig <- function(choice, prop_heads = 1)
     {
-    nvec = c(1, 2, 5,20,100)			# n tosses
-    svec = nvec   #c(5,20,100)     		# s heads
+    # Won't work for all prop_heads values.
+    nvec = c(1, 2, 6, 20, 100, 1000)			# n tosses
+    # svec = nvec   #c(5,20,100)     		# s heads
 
-    # choice is 1, 2, 3
+    # choice is 1, 2, 3, ..
     n = nvec[choice]
-    s = svec[choice]
+    s = prop_heads * n
 
     thetavec = seq(0.01,1,0.001)	# theta is prob of H (p in slides)
 
@@ -906,7 +918,7 @@ like_fig <- function(choice)
 		 # much white space for no labels (but do want numbers):
 
     # cmai=c(0.46, 0.46, 0.3, 0.3)
-    cmai=c(1, 1, 0.15, 0.3)
+    cmai=c(1, 1, 0.5, 0.3)
     par(mai=cmai)
 
     # par(mfrow=c(1,2), mai=cmai) # , lwd=3)
@@ -923,8 +935,14 @@ like_fig <- function(choice)
          cex.lab=tsize, cex.axis=tsize, lwd=3,
          xlab=expression(Value~of~italic(p)),
          ylab=expression(Likelihood~of~italic(p)),
-         ylim=c(0,1.1* max(L/sum(L)*1000)), yaxs="i")
+         ylim=c(0,1.1* max(L/sum(L)*1000)), yaxs="i",
+         cex.main = 0.8*tsize,
+         main=ifelse(s==1,
+                     ifelse(n==1, paste0(s, " head from ", n, " toss"),
+                                  paste0(s, " head from ", n, " tosses")),
+                     paste0(s, " heads from ", n, " tosses")))
     lines(thetavec, L/sum(L)*1000, lwd=3)
+    abline(v=0.5, col="red")
 
 #    plot(thetavec, prior, ylim=c(0,ymax ),  col="red", type="h", xlim=c(0,0.8), xaxs="i", yaxs="i",
 #         cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")# , lwd=3) )
@@ -944,6 +962,7 @@ like_fig(1)
 \begin{frame}
 \frametitle{Likelihood}
 
+\howlikely
 \begin{center}
 <<like-fig-2, out.width='0.75\\columnwidth', fig.height=4>>=
 like_fig(2)
@@ -956,6 +975,7 @@ like_fig(2)
 \begin{frame}
 \frametitle{Likelihood}
 
+\howlikely
 \begin{center}
 <<like-fig-3, out.width='0.75\\columnwidth', fig.height=4>>=
 like_fig(3)
@@ -969,6 +989,7 @@ like_fig(3)
 \begin{frame}
 \frametitle{Likelihood}
 
+\howlikely
 \begin{center}
 <<like-fig-4, out.width='0.75\\columnwidth', fig.height=4>>=
 like_fig(4)
@@ -981,6 +1002,7 @@ like_fig(4)
 \begin{frame}
 \frametitle{Likelihood}
 
+\howlikely
 \begin{center}
 <<like-fig-5, out.width='0.75\\columnwidth', fig.height=4>>=
 like_fig(5)
@@ -991,25 +1013,106 @@ like_fig(5)
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**}
+\frametitle{Likelihood}
+
+Similarly, how confident do we become regarding $p=0.5$ with more data when half of the tosses are heads?
+
+\begin{center}
+<<like-fig-6, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(2, prop_heads=0.5)
+@
+\end{center}
+\end{frame}
 
 
-**repetition of below?: Similarly, we have fisheries data and want to infer parameters and  make other
-calculations, essentially to calculate
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Similarly, how confident do we become regarding $p=0.5$ with more data when half of the tosses are heads?
+
+\begin{center}
+<<like-fig-7, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(3, prop_heads=0.5)
+@
+\end{center}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Similarly, how confident do we become regarding $p=0.5$ with more data when half of the tosses are heads?
+
+\begin{center}
+<<like-fig-8, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(4, prop_heads=0.5)
+@
+\end{center}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Similarly, how confident do we become regarding $p=0.5$ with more data when half of the tosses are heads?
+
+\begin{center}
+<<like-fig-9, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(5, prop_heads=0.5)
+@
+\end{center}
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Similarly, how confident do we become regarding $p=0.5$ with more data when half of the tosses are heads?
+
+\begin{center}
+<<like-fig-10, out.width='0.75\\columnwidth', fig.height=4>>=
+like_fig(6, prop_heads=0.5)
+@
+\end{center}
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Likelihood}
+
+Similarly, we have fisheries data and want to infer parameters and  make other
+calculations, essentially to calculate things such as
+
+~\\
 
 ~~P(\textcolor{red}{stock in healthy zone} | \textcolor{blue}{data on catches,
-  growth, etc.}).
+  growth, etc.}),
 
+~\\
 
+~~i.e.~P(\textcolor{red}{hyopthesis} | \textcolor{blue}{data}).
 
-Likelihood allows us to use a mathematical model estimate
+~\\
 
-~~P(stock is in the healthy zone | data)
+\pause
+
+So likelihood has a specific technical meaning (so please don't say `likelihood' when you simply mean `probability').
+
+~\\
 
 In practice we often need to use a \emph{Bayesian} approach, due to complexity
 of models
 
-**Somewhere: Please don't say `likelihood' when you simply mean `probability'.
+
 
 \end{frame}
 %----------------------------------------------------------
@@ -1099,7 +1202,7 @@ bayes_fig <- function(choice)
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{pasted in** Bayesian figures*** }
+\frametitle{Bayesian approach}
 
 Want to estimate the proportion of commuters that travel by bike
 
@@ -1112,7 +1215,7 @@ Want to estimate the proportion of commuters that travel by bike
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{pasted in** Bayesian figures*** }
+\frametitle{Bayesian approach}
 
 Collect more data:
 
@@ -1123,7 +1226,7 @@ Collect more data:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{pasted in** Bayesian figures*** }
+\frametitle{Bayesian approach}
 
 Collect even more data:
 
@@ -1134,34 +1237,59 @@ Collect even more data:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Bayesian figures*** three like before}
+\frametitle{Bayesian approach}
 
 Those examples can be done by solving the equations by hand.
 
+~\\
+
 Assessment models are way more complicated.
+
+~\\
+
+The Bayesian approach is often needed to help constrain the estimated values --
+we do not have enough data to fully fit the models and need help from the priors.
+
+~\\
 
 Recent advances, such as Markov Chain Monte Carlo (MCMC) simulations, allow
 us to use the Bayesian approach on complex models.
 
-**So we end up with, say, 1,000 representations of reality. Show one from
-hake. these are what he have but then can aggregate to show boxplots.
+~\\
 
-**Hake Fig 23 or 29.
-
-In assessment models, priors help constrain the model.
-
-I'm most familiar with age-structured models -- if we do not constrain some of the
-parameters then
-
-it can be hard for the model to be optimised (find the set of parameters that
-are most likely).
-
-This approach then allows us to calculate the probability of events.
-
-
+With MCMC we end up with, say, 1,000 representations of reality. 
 \end{frame}
 
 %----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Biomass index from acoustic Pacific Hake survey}
+
+\includegraphics[width=8cm, center]{images/hake-acoustic-fit.png}
+\vspace{-10mm}\\
+Each blue line is a different MCMC estimate of the biomass from the assessment model.
+Bold black line shows the median of these.
+
+However, can see that the biomass can deviate somewhat from the median.
+% (Boxplots are survey data).
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Boxplot from earlier}
+
+So we do not just show median, also need to show the uncertainty.
+
+Vulnerable biomass from earlier:
+
+\centering
+\includegraphics[height=2.5in]{images/vulnerable.png}
+
+\end{frame}
+
+% ----------------------------------------------------------
+
 \begin{frame}
 \frametitle{Further types of uncertainty}
 
