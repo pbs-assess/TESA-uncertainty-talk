@@ -339,13 +339,36 @@ Such as annual numbers of lynx trappings for 1821-1934 in Canada:
 
 ~\\
 
-~~269,  321,  585,  871, 1475, 2821, 3928, 5943, 4950, 2577, ...
+~~269,  321,  585,  871, 1475, 2821, 3928, 5943, 4950, 2577, 523, ...
 
-% lynx[1:10]
+% lynx[1:11]
+~\\
+
+Take those first 11 years and sort into order:
+
+% sort(lynx[1:11])
+~\\
+
+~~269  321  523 585  871 \alert<2->{1475} 2577 2821 3928 4950 5943
 
 ~\\
 
-But many measured values are \alert{continuous} -- they can take any value from
+\onslide<2-> \alert{Median} is the value in the middle
+
+\onslide<3-> \textcolor{blue}{Mean} is 2205.7, the total divided by 11.
+ 
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Communicating uncertainty}
+
+Typically display such data as histogram, necessarily bins the data **do 30:
+% hist(lynx, breaks=30)
+% hist(lynx, breaks=100)
+
+
+**dumped: But many measured values are \alert{continuous} -- they can take any value from
 a continuous range. For example:
 
 \bi
@@ -356,11 +379,6 @@ a continuous range. For example:
 \ei
 
 
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{**Communicating uncertainty}
 
 For discrete variables we can talk about P(die roll is 3), P(die roll is 4).
 
