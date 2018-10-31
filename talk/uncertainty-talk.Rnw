@@ -533,6 +533,10 @@ plot(xvals, yvals, col="red", lwd=3,
 
 What is the probability that a random fish weighs $>$120~g?
 
+~\\
+
+~\\
+
 \end{frame}
 
 
@@ -559,6 +563,7 @@ What is the probability that a random fish weighs $>$120~g?
 ~\\
 
 P(fish weight $>$120~g) is the \textcolor{blue}{area shaded in blue}.
+
 
 \end{frame}
 
@@ -602,35 +607,58 @@ For any distribution, we can give:
 
 ~\\
 
-<<hist-simp-6, fig.height=2.0>>=
+<<hist-simp-7, fig.height=2.0>>=
 par(mai=cmai)
-xvalslog = seq(0, 160, length=2000)
+xvalslog = seq(0, 180, length=2000)
 yvalslog = dlnorm(xvalslog, log(40), 0.7)  #*500*6
 ylimlog = c(0, max(yvalslog)*1.1)
 plot(xvalslog, yvalslog, col="red", lwd=3,
      xlim=range(xvalslog), ylim = ylimlog, type="l",
      xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
-lines(xvals[xvals>75 & xvals<85], yvals[xvals>75 & xvals<85], col="blue", type="h", lwd=4)
-lines(xvals, yvals, col="red", lwd=3)   # to be on top
+quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
+lines(xvalslog[xvalslog < quants[3]], yvalslog[xvalslog < quants[3]], col="blue", type="h", lwd=4)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[3], col="black", lwd=3)
 
 @
 
-Similarly, what is probability of random fish weighing between 75 and 85~g?
-
-P(75 $<$ fish weight $<$ 85) is the \textcolor{blue}{area shaded in blue}.
+\textcolor{blue}{Median} -- P(being $<$ median) = 0.5
 
 ~\\
-
-Since weight is continuous, we cannot ask P(fish weight = 120~g).
-
-**Then do mean, median, mode. And quantiles.
-
-**Show results, then will explain some of the methods used to get results (mention
-Bayes etc. at start).
 
 \end{frame}
 
 
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+And various other values:
+
+~\\
+
+<<hist-simp-8, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = ylimlog, type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
+lines(xvalslog[xvalslog < quants[1]], yvalslog[xvalslog < quants[1]], col="blue", type="h", lwd=4)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[1], col="black", lwd=3)
+
+@
+
+\textcolor{blue}{2.5\% percentile} -- P(being $<$ this value) = 0.025
+% ~~[2.5\% of the values lie beneath this value]
+
+~\\
+
+\end{frame}
 % ----------------------------------------------------------
 
 \begin{frame}
