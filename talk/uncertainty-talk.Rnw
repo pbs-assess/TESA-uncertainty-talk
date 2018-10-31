@@ -450,8 +450,6 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 
 \end{frame}
 
-% ----------------------------------------------------------
-
 %----------------------------------------------------------
 
 \begin{frame}
@@ -759,8 +757,6 @@ But often, we have \alert{data concerning different outcomes}, and want to
 \textcolor{blue}{infer how the system works -- what are the probabilities (is
   the coin fair?)}.
 
-~\\
-
 \end{frame}
 
 %----------------------------------------------------------
@@ -768,22 +764,24 @@ But often, we have \alert{data concerning different outcomes}, and want to
 \begin{frame}
 \frametitle{**}
 
-We have a coin, and what to know if it is fair or not?
+But often, we have \alert{data concerning different outcomes}, and want to
+\textcolor{blue}{infer how the system works -- what are the probabilities (is
+  the coin fair?)}.
 
-Fair coin: P(heads) = P(tails) = 0.5
+% We have a coin, and what to know if it is fair or not?
 
-P(heads, given we know it is a fair coin)
+% Fair coin: P(heads) = P(tails) = 0.5
 
-P(event, given parameter)
+~\\
 
+P(X | Y) is the conditional probability that event $X$ happens (or $X$ is true) given event $Y$ happens.
 
-**Often we want the other way round
+e.g. P(rains tomorrow | rains today)
 
+~\\
 
-P(parameter, given event)
-P(parameter, given data)
-
-
+% P(parameter, given event)
+% P(parameter, given data)
 
 
 \begin{tabular}{ll}
@@ -796,9 +794,8 @@ P(coin is fair | HH) & yes, could be fair (if so then a 25\% chance of getting H
 % Independence
 P(coin is fair | HHHH) & hmmm...., bit suspicious \\
 
-P(coin is fair | ** Heads) & no way \\
+P(coin is fair | 100 H in a row) & absolutely no way \\
 \end{tabular}
-Rosencratz....
 
 That's essentially the idea of \emph{likelihood}.
 
@@ -828,6 +825,8 @@ In practice we often need to use a \emph{Bayesian} approach, due to complexity
 of models
 
 \end{frame}
+%----------------------------------------------------------
+
 %----------------------------------------------------------
 
 \begin{frame}
@@ -997,6 +996,27 @@ hake. these are what he have but then can aggregate to show boxplots.
   \alert{`best'} model
 \item **discuss with Rob. Risk, could then segway into risk
 \ei
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+
+\frametitle{Questions?}
+
+~\\
+
+I have one -- which film/play starts off with one of the main characters tossing 100
+heads in a row?
+
+\pause
+
+Rosencrantz and Guildenstern Are Dead 
+
+~\\
+
+\includegraphics[width=6cm, center]{images/rosencrantz.png}
 
 \end{frame}
 
