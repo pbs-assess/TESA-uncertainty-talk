@@ -454,47 +454,6 @@ histAxes()
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Probabilities for continuous variables}
-
-For discrete variables we can talk about P(die roll is 3), P(die roll is 4).
-
-~\\
-
-However, for continuous variables, we cannot say P(this fish weighs 127~g).
-
-~\\
-
-No fish will weigh \alert{exactly} 127~g. Therefore
-
-~~~~P(this fish weighs 127~g) = 0
-
-as it's an impossible event.
-
-~\\
-
-So we have to talk about probability of the weight being within a range, such
-as
-
-~~P(250~g $<$ fish weight $\leq$ 260~g).
-
-% skip:
-
-% Temperature is continuous, though measured values are discrete (due to the
-% precision of the instrument).
-
-% ~~e.g. body temperature of a beaver at 10-minute intervals
-
-% <<beaver, results="asis">>=
-% kable(beaver1[1:6, 2:3], "latex", booktabs = TRUE) %>%
-%      kable_styling(latex_options = "striped")
-%      # column_spec(1, width = "3cm")
-% @
-
-
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}
 \frametitle{Continuous variables}
 
 To calculate probabilities, would first involve fitting a model:
@@ -727,7 +686,21 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 
 \end{frame}
 
-%----------------------------------------------------------
+\begin{frame}
+
+\frametitle{Questions?}
+
+Any question so far?
+
+~\\
+
+~\\
+
+\includegraphics[width=8cm, center]{images/correlation.png}
+
+\end{frame}
+
+% ----------------------------------------------------------
 
 \begin{frame}
 \frametitle{Going forward -- projections}
@@ -1649,8 +1622,6 @@ So roulette example.....
 **spell check
 \end{frame}
 
-\end{document}
-
 %----------------------------------------------------------
 
 \begin{frame}
@@ -1661,5 +1632,49 @@ Further reading/viewing:
 David Spiegelhalter (Winton Professor for the Public Understanding of Risk, Cambridge).
 
 ``Transparent evidence designed to inform, not to persuade''
+
+\end{frame}
+
+\end{document}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Probabilities for continuous variables}
+
+For discrete variables we can talk about P(die roll is 3), P(die roll is 4).
+
+~\\
+
+However, for continuous variables, we cannot say P(this fish weighs 127~g).
+
+~\\
+
+No fish will weigh \alert{exactly} 127~g. Therefore
+
+~~~~P(this fish weighs 127~g) = 0
+
+as it's an impossible event.
+
+~\\
+
+So we have to talk about probability of the weight being within a range, such
+as
+
+~~P(250~g $<$ fish weight $\leq$ 260~g).
+
+% skip:
+
+% Temperature is continuous, though measured values are discrete (due to the
+% precision of the instrument).
+
+% ~~e.g. body temperature of a beaver at 10-minute intervals
+
+% <<beaver, results="asis">>=
+% kable(beaver1[1:6, 2:3], "latex", booktabs = TRUE) %>%
+%      kable_styling(latex_options = "striped")
+%      # column_spec(1, width = "3cm")
+% @
+
 
 \end{frame}
