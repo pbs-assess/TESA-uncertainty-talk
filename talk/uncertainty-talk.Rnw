@@ -149,23 +149,45 @@ Thursday 1st November, 2018}
 \titlepage
 }
 
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Aims of this lecture}
+~\\
+
+\begin{minipage}{12cm}
+\bi
+  \item Demonstrate ways that stock assessment scientists can include
+    uncertainty in advice
+  \item \textcolor{blue}{Explain how to interpret such uncertainty}
+  \item Relate the concepts to fairly simple examples
+  \item \textcolor{blue}{Describe background to some of the methods used}
+  \item Caveats and potential pitfalls
+\ei
+\end{minipage}
+\end{frame}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Outline}
 \subsection{}
-\frame{\frametitle{**Outline}
+\frame{\frametitle{Outline}
 \bi
   \item Basic introduction to probability
   \item Examples of probabilities that we can calculate in assessments
-  \item Communicating uncertainty
+  \item Presenting uncertainty in assessments
   \bi
     \item Stock status
     \item Projections
     \item Decision tables
   \ei
   \item Brief details of how probabilities get calculated
-  \item Bayesian analysis
-  \item Other sources of uncertainty
+  \bi
+    \item Likelihood
+    \item Bayesian analysis
+  \ei
+  \item Other sources of uncertainty -- big caveat 
   \item Risk
   \item Concluding remarks
 \ei
@@ -471,8 +493,6 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 \begin{frame}
 \frametitle{Results in context of precautionary-approach figure}
 
-**Estimated recruitment (1000's of age-1 individuals) through time:
-
 \centering
 \includegraphics[height=2.5in]{images/PA-graph.png}
 
@@ -482,8 +502,6 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 
 \begin{frame}
 \frametitle{Results in context of precautionary-approach figure}
-
-**Estimated ecruitment (1000's of age-1 individuals) through time:
 
 \centering
 \includegraphics[height=2.5in]{images/POP-status.png}
@@ -495,8 +513,6 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 \begin{frame}
 \frametitle{Results in context of precautionary-approach figure}
 
-**Estimated ecruitment (1000's of age-1 individuals) through time:
-
 \centering
 \includegraphics[height=2.5in]{images/POP-status2.png}
 
@@ -506,8 +522,6 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 
 \begin{frame}
 \frametitle{**Results in context of precautionary-approach figure}
-
-**Estimated ecruitment (1000's of age-1 individuals) through time:
 
 \centering
 \includegraphics[height=2.5in]{images/snail.png}
@@ -535,14 +549,15 @@ Spawning biomass up to 2013 (black), and projected spawning biomass (red) based 
 \begin{frame}
 \frametitle{**Decision tables}
 
-In fisheries science, a decision table presents \alert{potential consequences of different decisions}, and is used to help facilitate decision making.
+In fisheries science, a decision table presents \alert{potential consequences of different decisions},\\
+and is used to help facilitate decision making.
 
+**Okay? I made that up.
 
-For example...
+~\\
 
-Based on projections:
-
-Probabilities of being in healthy zone each year based on different
+For example, based on projections, show the
+probabilities of being in the healthy zone each year based on different
 levels of \alert{constant} catch.
 
 \end{frame}
@@ -710,9 +725,6 @@ No general rule as to which way to do them.
 Often historical legacy, so can be confusing to change for a particular species
 to create consistency.
 
-**Though we don't actually do that in Pacific Hake, kept with what's been done
-historically (and we show \% signs).
-
 \end{frame}
 
 % ----------------------------------------------------------
@@ -722,7 +734,7 @@ historically (and we show \% signs).
 
 Note also the representation of probabilities as \% rather than decimals.
 
-Was preferred by stakeholders.
+Was originally preferred by stakeholders.
 
 \centering
 \includegraphics[height=7.5cm]{images/hake-dec-table.png}
