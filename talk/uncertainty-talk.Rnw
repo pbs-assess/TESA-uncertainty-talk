@@ -187,7 +187,7 @@ Thursday 1st November, 2018}
     \item Likelihood
     \item Bayesian analysis
   \ei
-  \item Other sources of uncertainty -- big caveat 
+  \item Other sources of uncertainty -- big caveat
   \item Risk
   \item Concluding remarks
 \ei
@@ -246,10 +246,10 @@ Thursday 1st November, 2018}
   & Fraction & Decimal & Percentage & Odds \\
   & & & & \\
 Probability that a tossed coin lands heads: & $\dfrac{1}{2}$ & \alert<3-4>{0.5} &
-  \textcolor<4>{blue}{50\%} & 1 in 2 \\
+  \textcolor<4>{blue}{50\%} & \textcolor<4>{blue}{1 in 2} \\
   & & & & \\
 \onslide<2->Probability that a rolled die gives a six: & $\dfrac{1}{6}$ &
-  \alert<3-4>{0.167} & \textcolor<4>{blue}{16.7\%} & 1 in 6
+  \alert<3-4>{0.167} & \textcolor<4>{blue}{16.7\%} & \textcolor<4>{blue}{1 in 6}
 \end{tabular}
 \includegraphics<2-4>[height=1cm, right]{images/die-roll.png}
 
@@ -298,6 +298,16 @@ Other events:
 %----------------------------------------------------------
 
 \begin{frame}
+\frametitle{What is the probability that the stock is in the healthy zone?}
+
+\centering
+\includegraphics[height=2.5in]{images/PA-graph.png}
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
 \frametitle{Introduction to probability}
 
 \begin{tabular}{ll}
@@ -330,9 +340,9 @@ Probabilities of \textcolor{red}{all possible events} add up to 1:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Do discrete values (easy), cts (harder)}
+\frametitle{Discrete outcomes}
 
-A die rolls can only produce \alert{discrete} values: 1, 2, 3, 4, 5 or 6.
+A die roll can only produce \alert{discrete} values: 1, 2, 3, 4, 5 or 6.
 
 ~\\
 
@@ -384,14 +394,12 @@ Take those first 11 years and sort into order:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Communicating uncertainty}
+\frametitle{Continuous data}
 
-Typically display such data as histogram, necessarily bins the data **do 30:
 % hist(lynx, breaks=30)
 % hist(lynx, breaks=100)
 
-
-**dumped: But many measured values are \alert{continuous} -- they can take any value from
+But many measured values are \alert{continuous} -- they can take any value from
 a continuous range. For example:
 
 \bi
@@ -401,19 +409,64 @@ a continuous range. For example:
 \item depth
 \ei
 
+To plot we have to bin the data, e.g. weights of 500 fish:
 
+<<hist-simp, fig.height=2.0>>=
+set.seed(42)
+vals = rnorm(500, 100, 20)
+cmai=c(0.8, 0.8, 0.15, 0.3)
+par(mai=cmai)
+xlimhist = c(40, 160)
+ylimhist = c(0, 65)
+hist(vals, main ="", xlab="Weight, g", breaks=20, xlim=xlimhist, ylim=ylimhist)
+# plot(as.factor(rolls), xlab="Number on die", ylab="Count", ylim=c(0,100))
+@
+
+<<hist, eval=FALSE>>=
+# from fitting-size-spectra if want nicer:
+# Histogram of MLEs
+
+vertThick = 1              # Thickness for vertical lines
+
+xrange = c(0,4)         # range of x-axis for histograms
+xbigticks = seq(-3.5, 0.5, 0.5)
+
+xsmallticks = seq(xrange[1], xrange[2], by=0.1)
+# breakshist = seq(xrange[1], xrange[2], by=0.05)
+         # ends a bin at 0 for xrange[1]=0, just won't have 2 in centre of bin
+breakshist = seq(xrange[1], xrange[2], by=3/61)
+
+xLim = c(-3.2, -1.5)
+ylimA = c(0, 5500)
+
+cexAxis = 1  # was 0.9      # font size for axes labels to make y ones fit ok
+
+inset = c(-0.08, -0.04)       # (default in confPlot)
+xlabpos = 0.75       # just play with a number, as now using pos=4 in text
+
+hist(MLEbin.rep, xlim=xLim, breaks=breakshist, xlab="", ylab="Frequency",
+  main="", axes=FALSE, ylim = ylimA)  #  ylim=c(0,1100),
+histAxes()
+@
+
+
+\end{frame}
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Probabilities for continuous variables}
 
 For discrete variables we can talk about P(die roll is 3), P(die roll is 4).
 
 ~\\
 
-However, for continuous variables, we cannot say P(this fish weighs 257~g).
+However, for continuous variables, we cannot say P(this fish weighs 127~g).
 
 ~\\
 
-No fish will weigh \alert{exactly} 257~g. Therefore
+No fish will weigh \alert{exactly} 127~g. Therefore
 
-~~P(this fish weighs 257~g) = 0
+~~~~P(this fish weighs 127~g) = 0
 
 as it's an impossible event.
 
@@ -437,30 +490,148 @@ as
 %      # column_spec(1, width = "3cm")
 % @
 
+
 \end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**}
+\frametitle{**Communicating uncertainty}
 
-Graphically, this can be shown as
+For real data, this would involve fitting a model:
 
-**Draw cts, shade in, based on plot(thetavec).
+<<hist-simp-2, fig.height=2.0>>=
+set.seed(42)
+# vals = rnorm(500, 100, 20)
+cmai=c(0.8, 0.8, 0.15, 0.3)
+par(mai=cmai)
+hist(vals, main ="", xlab="Weight, g", breaks=20, xlim=xlimhist, ylim=ylimhist)
+xvals = seq(40, 160, length=200)
+yvals = dnorm(xvals, 100, 20)
+lines(xvals, yvals*500*6, col="red", lwd=3) # 6 is width/breaks
+@
 
-Cts - can only talk about P(X $\leq$3). etc.
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Communicating uncertainty}
+
+Now we have a model, we can ask questions:
+
+~\\
+
+<<hist-simp-3, fig.height=2.0>>=
+par(mai=cmai)
+#hist(vals, main ="", xlab="Weight, g", breaks=20, plot=FALSE,
+#     xlim=xlimhist, ylim=ylimhist)
+#xvals = seq(40, 160, length=200)
+plot(xvals, yvals, col="red", lwd=3,
+     xlim=xlimhist, type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i")
+@
+
+What is the probability that a random fish weighs $>$120~g?
+
+\end{frame}
 
 
-Results are distributions.
+%----------------------------------------------------------
 
-**In practice can think of as representing a histogram of results.
+\begin{frame}
+\frametitle{**Communicating uncertainty}
+
+Now we have a model, we can ask questions:
+
+~\\
+
+<<hist-simp-4, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvals, yvals, col="red", lwd=3,
+     xlim=xlimhist, type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i")
+lines(xvals[xvals>120], yvals[xvals>120], col="blue", type="h", lwd=4)
+lines(xvals, yvals, col="red", lwd=3)   # to be on top
+@
+
+What is the probability that a random fish weighs $>$120~g?
+
+~\\
+
+P(fish weight $>$120~g) is the \textcolor{blue}{area shaded in blue}.
+
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{**Communicating uncertainty}
+
+Now we have a model, we can ask questions:
+
+~\\
+
+<<hist-simp-5, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvals, yvals, col="red", lwd=3,
+     xlim=xlimhist, type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i")
+lines(xvals[xvals>75 & xvals<85], yvals[xvals>75 & xvals<85], col="blue", type="h", lwd=4)
+lines(xvals, yvals, col="red", lwd=3)   # to be on top
+
+@
+
+Similarly, what is probability of random fish weighing between 75 and 85~g?
+
+P(75 $<$ fish weight $<$ 85) is the \textcolor{blue}{area shaded in blue}.
+
+~\\
+
+Since weight is continuous, we cannot ask P(fish weight = 120~g).
+
+\end{frame}
+
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+For any distribution, we can give:
+
+~\\
+
+<<hist-simp-6, fig.height=2.0>>=
+par(mai=cmai)
+xvalslog = seq(0, 160, length=2000)
+yvalslog = dlnorm(xvalslog, log(40), 0.7)  #*500*6
+ylimlog = c(0, max(yvalslog)*1.1)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = ylimlog, type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+lines(xvals[xvals>75 & xvals<85], yvals[xvals>75 & xvals<85], col="blue", type="h", lwd=4)
+lines(xvals, yvals, col="red", lwd=3)   # to be on top
+
+@
+
+Similarly, what is probability of random fish weighing between 75 and 85~g?
+
+P(75 $<$ fish weight $<$ 85) is the \textcolor{blue}{area shaded in blue}.
+
+~\\
+
+Since weight is continuous, we cannot ask P(fish weight = 120~g).
 
 **Then do mean, median, mode. And quantiles.
 
-Show results, then will explain some of the methods used to get results (mention
+**Show results, then will explain some of the methods used to get results (mention
 Bayes etc. at start).
 
 \end{frame}
-%----------------------------------------------------------
+
+
+% ----------------------------------------------------------
 
 \begin{frame}
 \frametitle{Communicating uncertainty}
@@ -1269,7 +1440,7 @@ us to use the Bayesian approach on complex models.
 
 ~\\
 
-With MCMC we end up with, say, 1,000 representations of reality. 
+With MCMC we end up with, say, 1,000 representations of reality.
 \end{frame}
 
 %----------------------------------------------------------
