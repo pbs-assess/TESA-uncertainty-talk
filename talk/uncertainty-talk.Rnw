@@ -153,16 +153,20 @@ Thursday 1st November, 2018}
 
 \begin{frame}
 \frametitle{Aims of this lecture}
+% ~\\
+
+I hope that you'll come away with an understanding of:
+
 ~\\
 
 \begin{minipage}{12cm}
 \bi
-  \item Demonstrate ways that stock assessment scientists can include
-    uncertainty in advice
-  \item \textcolor{blue}{Explain how to interpret such uncertainty}
-  \item Relate the concepts to fairly simple examples
-  \item \textcolor{blue}{Describe background to some of the methods used}
-  \item Caveats and potential pitfalls
+  \item How stock assessment scientists can include
+    uncertainty in advice to managers
+  \item \textcolor{blue}{How to interpret such uncertainty}
+  % \item The concepts behind these Relate the concepts to fairly simple examples
+  \item Some of the methods used
+  \item \textcolor{blue}{Caveats and potential pitfalls}
 \ei
 \end{minipage}
 \end{frame}
@@ -466,7 +470,7 @@ par(mai=cmai)
 hist(vals, main ="", xlab="Weight, g", breaks=20, xlim=xlimhist, ylim=ylimhist)
 xvals = seq(40, 160, length=200)
 yvals = dnorm(xvals, 100, 20)
-lines(xvals, yvals*500*6, col="red", lwd=3) # 6 is width/breaks
+lines(xvals, yvals*500*5, col="red", lwd=3) # 6 is width/breaks
 @
 
 \end{frame}
@@ -1301,6 +1305,26 @@ of models
 \end{frame}
 %----------------------------------------------------------
 
+
+\begin{frame}
+
+\frametitle{Questions?}
+
+~\\
+
+I have one -- which film/play starts off with one of the main characters tossing 100
+heads in a row?
+
+\pause
+
+Rosencrantz and Guildenstern Are Dead
+
+~\\
+
+\includegraphics[width=6cm, center]{images/rosencrantz.png}
+
+\end{frame}
+
 %----------------------------------------------------------
 
 \begin{frame}
@@ -1499,27 +1523,6 @@ Vulnerable biomass from earlier:
 %----------------------------------------------------------
 
 \begin{frame}
-
-\frametitle{Questions?}
-
-~\\
-
-I have one -- which film/play starts off with one of the main characters tossing 100
-heads in a row?
-
-\pause
-
-Rosencrantz and Guildenstern Are Dead
-
-~\\
-
-\includegraphics[width=6cm, center]{images/rosencrantz.png}
-
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}
 \frametitle{Risk}
 
 \begin{minipage}{8cm}
@@ -1552,56 +1555,78 @@ But the \alert{\emph{probabilities of winning}} are the same (regardless of the 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**risk}
+\frametitle{Risk}
 
-`Risk' is associated with a negative consequence:
+`Risk' is colloquially associated with a negative consequence:
 
 \bc
 \alert{``chance or possibility of danger, loss, injury etc.'' (OED)}
 \ec
 
-It does not mean probability -- you would not say ``the risk of getting heads''.
+Quantitatively, risk is the
 
-The outcome is part of the definition of risk.
+\bc
+\alert``expected value of an undesirable outcome,''
+\ec
 
-You might hear ``the risk of being in the cautious zone''
+and can be expressed as
 
-~~but not ``the risk of being in the healthy zone''
+\bc
+P(outcome) $\times$ expected loss if outcome occurs
+\ec
 
-More formally, we would associate it with a probability **need definition** Rob?
-
-Quantitatively, risk is the \alert``expected value of an undesirable outcome''.
-
-Prob outcome $\times$ expected loss if outcome occurs
-
-So roulette example.....
-
-
+Easy to \alert{quantify the expected loss} in roulette example, very hard to do
+in the context of fisheries management.
 
 \end{frame}
 
 % ----------------------------------------------------------
 
+%----------------------------------------------------------
+
 \begin{frame}
-\frametitle{**Template}
+\frametitle{Risk}
 
+\bc
+P(outcome) $\times$ expected loss if outcome occurs
+\ec
 
+In assessments we can calculate
+\bc
+P(stock will be in the critical zone next year if catch stays the same)
+\ec
+
+but what is the expected loss of this outcome?
+
+Hard to quantify.
+
+Will be different for different stakeholders.
 
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Example figs with mfrow}
-  \bc
-  \vspace{-5pt}
-  <<bridge.biomass, fig.height=5, fig.width=10, out.width='0.95\\columnwidth'>>=
-    par(mfrow = c(1,2))
-    plot(1:10)
-    plot(1:20)
-    box()
-  @
-  \ec
+\frametitle{Risk}
+
+So risk depends on the consequences of the outcome.
+
+~\\
+
+It does not mean probability -- you would not say ``the risk of getting heads''.
+
+~\\
+
+You might hear ``the risk of being in the cautious zone''
+
+~\\
+
+~~but not ``the risk of being in the healthy zone''
+
+~\\
+
+So don't say `risk' when you just mean `probability'.
+
 \end{frame}
 
 %----------------------------------------------------------
@@ -1620,18 +1645,28 @@ So roulette example.....
 \ei
 ** Uncertainty about uncertainty.
 **spell check
+**See Rob T's's email.
 \end{frame}
 
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Template}
+\frametitle{Acknowledgements}
+
+Thanks for feedback/comments/emails: Rob Kronlund, Carrie Holt, Jaclyn Cleary, Rob Tadey,
+Ian Taylor.
+
+~\\
 
 Further reading/viewing:
 
+~\\
+
 David Spiegelhalter (Winton Professor for the Public Understanding of Risk, Cambridge).
 
-``Transparent evidence designed to inform, not to persuade''
+\bc
+\alert{``Transparent evidence designed to inform, not to persuade''}
+\ec
 
 \end{frame}
 
