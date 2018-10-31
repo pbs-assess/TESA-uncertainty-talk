@@ -860,12 +860,12 @@ This approach then allows us to calculate the probability of events.
 
 %----------------------------------------------------------
 
-\begin{frame}
-\frametitle{Bayesian figures*** three like before}
+% \begin{frame}
+% \frametitle{Bayesian figures*** three like before}
 % From images/bayes-figures/draper4btalk.r from 2004
 
 <<bayes-fig-1, out.width='0.95\\columnwidth', fig.height=3>>=
-# fig.height=5, fig.width=10,
+# Keeping function here, but ended up copy and pasting old slides for speed
 
 bayes_fig <- function(choice)
     {
@@ -920,14 +920,50 @@ bayes_fig <- function(choice)
          cex.lab=tsize, cex.axis=tsize, lwd=3, xlab="", ylab="")# , lwd=3) )
     lines(thetavec, prior, lwd=3)
 }
-bayes_fig(1)
+# bayes_fig(1)
+# bayes_fig(2)
+# bayes_fig(3)
 @
-\begin{textblock}{0.5}(0.001,0.001)
-  Test
-\end{textblock}
+% \begin{textblock}{0.5}(0.001,0.001)
+%   **Test
+% \end{textblock}
+
+% \end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{pasted in** Bayesian figures*** }
+
+Want to estimate the proportion of commuters that travel by bike
+
+~\\
+
+\includegraphics[width=10cm, center]{images/bayes-pic-1.png}
 
 \end{frame}
 
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{pasted in** Bayesian figures*** }
+
+Collect more data:
+
+\includegraphics[width=10cm, center]{images/bayes-pic-2.png}
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{pasted in** Bayesian figures*** }
+
+Collect even more data:
+
+\includegraphics[width=10cm, center]{images/bayes-pic-3.png}
+
+\end{frame}
 
 %----------------------------------------------------------
 
