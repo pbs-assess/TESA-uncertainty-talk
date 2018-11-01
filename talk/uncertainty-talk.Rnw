@@ -65,6 +65,7 @@
 % Looks like for hake we didn't use the defaults and played with the spacing
 % \vskip0pt plus 1filll
 \begin{center}
+\vskip6pt
 {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\\
 \vskip22pt
 \insertauthor
@@ -153,38 +154,6 @@ Thursday 1st November, 2018}
 \frame[plain]{
 \titlepage
 }
-\frame[plain]{
-\bc
-~\\
-{\Large Including uncertainty in advice to managers}
-
-~\\
-
-Andrew Edwards
-
-~\\ 
-
-\includegraphics[height=3cm]{images/pbs.png}
-
-~\\
-
-\textcolor{blue}{Pacific Biological Station, Nanaimo, BC}
-
-% \includegraphics[height=3.3cm]{images/pbs.png}}
-
-% \subtitle
-% {\small 
-Lecture 5 of TESA's \emph{Introduction to Stock Assessment} WebEx series.
-
-~\\
-
-Thursday 1st November, 2018
-
-\ec
-
-}
-% \end{frame}
-
 %----------------------------------------------------------
 
 \begin{frame}
