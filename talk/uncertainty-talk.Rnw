@@ -242,6 +242,18 @@ I hope that you'll come away with an understanding of:
 
 
 
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Schematic of a model (Pacific Ocean Perch)}
+
+\centering
+\includegraphics[height=4in]{images/model-schematic.png}
+
+\end{frame}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction to probability}
 \subsection{}
@@ -1667,9 +1679,9 @@ With MCMC we end up with, say, 1,000 representations of reality.
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Biomass index from acoustic Pacific Hake survey}
+\frametitle{Biomass estimate for Pacific Hake}
 
-\includegraphics[width=8cm, center]{images/hake-acoustic-fit.png}
+\includegraphics[width=8cm, center]{images/mcmc-posterior-biomass.png}
 \vspace{-10mm}\\
 Each blue line is a different MCMC estimate of the biomass from the assessment model.
 Bold black line shows the median of these.
@@ -1882,8 +1894,8 @@ So risk does not simply mean probability -- you would not say ``the risk of gett
 \frametitle{Acknowledgements}
 
 Thanks for feedback/comments/emails: Rob Kronlund, Carrie Holt, Jaclyn Cleary,
-Rowan Haigh, Rob Tadey,
-Ian Taylor.
+Rowan Haigh, Chris Grandin, Rob Tadey,
+Ian Taylor (NOAA).
 
 ~\\
 
@@ -1893,11 +1905,15 @@ Next week: \textcolor{blue}{Rob Kronlund -- Management Strategy Evaluation}
 
 ~\\
 
+\pause
+
 Further reading/viewing:
 
 ~\\
 
 David Spiegelhalter (Winton Professor for the Public Understanding of Risk, Cambridge).
+
+\pause
 
 \bc
 \alert{``Transparent evidence designed to inform, not to persuade''}
