@@ -72,12 +72,12 @@
 \insertinstitute
 % \insertdate
 \end{center}
-\vskip30pt
+% \vskip30pt
 \vfill
 \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle % \par
 % \vskip0pt plus 1filll
 \hfill
-\includegraphics[width=5cm]{images/DFO_Logo.png}   % from Wikipedia (for hake we
+\includegraphics[width=4.8cm]{images/DFO_Logo.png}   % from Wikipedia (for hake we
                                         % had an older one)
 \vskip10pt
 }
@@ -133,7 +133,7 @@ admb.version = 999
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title[Uncertainty]{~\\ Including uncertainty in advice to managers}
-\author{Andrew Edwards\\ ~\\ \includegraphics[height=3cm]{images/pbs.png}\\  ~\\ \textcolor{blue}{Pacific Biological Station, Nanaimo, BC}}
+\author{Andrew Edwards\\ ~\\ \includegraphics[height=3.5cm]{images/pbs.png}\\  ~\\ \textcolor{blue}{Pacific Biological Station, Nanaimo, BC}}
 % \institute{{\textcolor{blue}{Pacific Biological Station, Nanaimo, BC}\\
 %  ~\\
 % \institute{\includegraphics[height=3cm]{images/pbs.png}}
@@ -149,9 +149,41 @@ Thursday 1st November, 2018}
 % \setbeamertemplate{headline}{}
 % \setbeamertemplate{mini frames}{}
 
+%\begin[plain]{frame}
 \frame[plain]{
 \titlepage
 }
+\frame[plain]{
+\bc
+~\\
+{\Large Including uncertainty in advice to managers}
+
+~\\
+
+Andrew Edwards
+
+~\\ 
+
+\includegraphics[height=3cm]{images/pbs.png}
+
+~\\
+
+\textcolor{blue}{Pacific Biological Station, Nanaimo, BC}
+
+% \includegraphics[height=3.3cm]{images/pbs.png}}
+
+% \subtitle
+% {\small 
+Lecture 5 of TESA's \emph{Introduction to Stock Assessment} WebEx series.
+
+~\\
+
+Thursday 1st November, 2018
+
+\ec
+
+}
+% \end{frame}
 
 %----------------------------------------------------------
 
