@@ -583,18 +583,11 @@ quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
 lines(xvalslog[xvalslog < quants[3]], yvalslog[xvalslog < quants[3]], col="blue", type="h", lwd=4)
 lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
 abline(v=quants[3], col="black", lwd=3)
-set.seed=42
-boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TRUE, at=0.02, width=0.005)
-
-
 
 # for testint:
-plot(xvalslog, yvalslog, col="red", lwd=3,
-     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
-     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
-boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TRUE, at=0.025, boxwex=0.01,
-     outline=FALSE     )
-
+#plot(xvalslog, yvalslog, col="red", lwd=3,
+#     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
+#     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
 
 # Attempt at tweaking from PBSawatea (but fiddly, stick with boxplot)
 #yrs=0.025     # yvalue to plot
@@ -609,12 +602,11 @@ boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TR
 #			segments( yrs-delta,obj[3],yrs+delta,obj[3],lty=1,col=1 )
 @
 
-\textcolor{blue}{Median} -- P(being $<$ median) = 0.5
+\textcolor{blue}{Median}. P(being $<$ median) = 0.5
 
 ~\\
 
 \end{frame}
-
 
 
 %----------------------------------------------------------
@@ -639,8 +631,41 @@ abline(v=quants[1], col="black", lwd=3)
 
 @
 
-\textcolor{blue}{2.5\% percentile} -- P(being $<$ this value) = 0.025
+\textcolor{blue}{2.5\% percentile}. P(being $<$ this value) = 0.025
 % ~~[2.5\% of the values lie beneath this value]
+
+~\\
+
+\end{frame}
+
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+One way of summarising resulting distributions is through boxplots:
+
+~\\
+
+<<hist-simp-9, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
+lines(xvalslog[xvalslog < quants[3]], yvalslog[xvalslog < quants[3]], col="blue", type="h", lwd=3)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[3], col="grey", lwd=2)
+
+set.seed=42
+box.at = 0.025
+boxplot(rlnorm(1000, log(40), 0.7), horizontal=TRUE, add=TRUE, at=box.at, boxwex=0.01,
+     outline=FALSE, range=0.001)
+lines(quants[1:2], c(box.at, box.at))   # Manual whiskers
+lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
+@
+\textcolor{blue}{Median 50\% percentile}  % -- P(being $<$ this value) = 0.025
 
 ~\\
 
@@ -648,27 +673,124 @@ abline(v=quants[1], col="black", lwd=3)
 
 %----------------------------------------------------------
 
+
 \begin{frame}
 \frametitle{Key terms}
 
-One way of summarising resulting distributions is through boxplots
+One way of summarising resulting distributions is through boxplots:
 
 ~\\
 
-<<hist-simp-9, fig.height=2.0>>=
+<<hist-simp-12, fig.height=2.0>>=
 par(mai=cmai)
 plot(xvalslog, yvalslog, col="red", lwd=3,
-     xlim=range(xvalslog), ylim = ylimlog, type="l",
+     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
      xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
-quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
-lines(xvalslog[xvalslog < quants[1]], yvalslog[xvalslog < quants[1]], col="blue", type="h", lwd=4)
+lines(xvalslog[xvalslog < quants[1]], yvalslog[xvalslog < quants[1]], col="blue", type="h", lwd=3)
 lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
 
-abline(v=quants[1], col="black", lwd=3)
+abline(v=quants[1], col="grey", lwd=2)
 
+set.seed=42
+boxplot(rlnorm(1000, log(40), 0.7), horizontal=TRUE, add=TRUE, at=box.at, boxwex=0.01,
+     outline=FALSE, range=0.001)
+lines(quants[1:2], c(box.at, box.at))   # Manual whiskers
+lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
 @
+\textcolor{blue}{2.5\% percentile}  % -- P(being $<$ this value) = 0.025
 
-% \textcolor{blue}{2.5\% percentile} -- P(being $<$ this value) = 0.025
+~\\
+
+\end{frame}
+
+% ------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+One way of summarising resulting distributions is through boxplots:
+
+~\\
+
+<<hist-simp-13, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+lines(xvalslog[xvalslog < quants[2]], yvalslog[xvalslog < quants[2]], col="blue", type="h", lwd=3)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[2], col="grey", lwd=2)
+
+set.seed=42
+boxplot(rlnorm(1000, log(40), 0.7), horizontal=TRUE, add=TRUE, at=box.at, boxwex=0.01,
+     outline=FALSE, range=0.001)
+lines(quants[1:2], c(box.at, box.at))   # Manual whiskers
+lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
+@
+\textcolor{blue}{25\% percentile}  % -- P(being $<$ this value) = 0.025
+
+~\\
+
+\end{frame}
+
+% ------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+One way of summarising resulting distributions is through boxplots:
+
+~\\
+
+<<hist-simp-10, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+lines(xvalslog[xvalslog < quants[4]], yvalslog[xvalslog < quants[4]], col="blue", type="h", lwd=3)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[4], col="grey", lwd=2)
+
+set.seed=42
+boxplot(rlnorm(1000, log(40), 0.7), horizontal=TRUE, add=TRUE, at=box.at, boxwex=0.01,
+     outline=FALSE, range=0.001)
+lines(quants[1:2], c(box.at, box.at))   # Manual whiskers
+lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
+@
+\textcolor{blue}{75\% percentile}  % -- P(being $<$ this value) = 0.025
+
+~\\
+
+\end{frame}
+
+% ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+One way of summarising resulting distributions is through boxplots:
+
+~\\
+
+<<hist-simp-11, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+lines(xvalslog[xvalslog < quants[5]], yvalslog[xvalslog < quants[5]], col="blue", type="h", lwd=3)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[5], col="grey", lwd=2)
+
+set.seed=42
+boxplot(rlnorm(1000, log(40), 0.7), horizontal=TRUE, add=TRUE, at=box.at, boxwex=0.01,
+     outline=FALSE, range=0.001)
+lines(quants[1:2], c(box.at, box.at))   # Manual whiskers
+lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
+@
+\textcolor{blue}{97.5\% percentile}  % -- P(being $<$ this value) = 0.025
 
 ~\\
 
@@ -745,6 +867,8 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 \frametitle{Questions?}
 
 Any question so far?
+
+\pause
 
 ~\\
 
