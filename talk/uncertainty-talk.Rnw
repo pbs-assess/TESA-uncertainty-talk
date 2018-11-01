@@ -122,6 +122,7 @@ opts_chunk$set(dev = 'cairo_ps',
 library(dplyr)
 library(xtable)
 library(kableExtra)
+# library(Hmisc)
 assess.yr = 2018
 last.assess.yr = assess.yr - 1
 survey.end.yr = 2017
@@ -591,20 +592,21 @@ boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TR
 plot(xvalslog, yvalslog, col="red", lwd=3,
      xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
      xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
-boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TRUE, at=0.025, boxwex=0.01
-        )
+boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TRUE, at=0.025, boxwex=0.01,
+     outline=FALSE     )
 
 
-yrs=0.025     # yvalue to plot
-obj = quants
-delta = 0.25
+# Attempt at tweaking from PBSawatea (but fiddly, stick with boxplot)
+#yrs=0.025     # yvalue to plot
+#obj = quants
+#delta = 0.25
 # From PBSawates	delta <- 0.25
 #			# Draw the outer whiskers.
-			segments( yrs,obj[1], yrs,obj[5], lty=1,col=1 )
+#			segments( yrs,obj[1], yrs,obj[5], lty=1,col=1 )
 #			# Overlay the box.
-			rect( yrs-delta,obj[2], yrs+delta, obj[4])
+#			rect( yrs-delta,obj[2], yrs+delta, obj[4])
 #			# Add the median.
-			segments( yrs-delta,obj[3],yrs+delta,obj[3],lty=1,col=1 )
+#			segments( yrs-delta,obj[3],yrs+delta,obj[3],lty=1,col=1 )
 @
 
 \textcolor{blue}{Median} -- P(being $<$ median) = 0.5
@@ -676,8 +678,6 @@ abline(v=quants[1], col="black", lwd=3)
 
 \begin{frame}
 \frametitle{Communicating uncertainty}
-
-Model results are complex and have to be explained, including uncertainty.
 
 Catch data and vulnerable biomass estimated from a model:
 
