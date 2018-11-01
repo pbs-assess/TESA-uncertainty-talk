@@ -166,12 +166,12 @@ I hope that you'll come away with an understanding of:
 
 \begin{minipage}{12cm}
 \bi
-  \item How stock assessment scientists can include
+  \item how stock assessment scientists can include
     uncertainty in advice to managers
-  \item \textcolor{blue}{How to interpret such uncertainty}
+  \item \textcolor{blue}{how to interpret such uncertainty}
   % \item The concepts behind these Relate the concepts to fairly simple examples
-  \item Some of the methods used
-  \item \textcolor{blue}{Caveats and potential pitfalls}
+  \item some of the methods used to quantify uncertainty
+  \item \textcolor{blue}{caveats and potential pitfalls}
 \ei
 \end{minipage}
 \end{frame}
