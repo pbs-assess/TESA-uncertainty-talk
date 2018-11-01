@@ -240,7 +240,31 @@ I hope that you'll come away with an understanding of:
 % \vskip10pt
 \end{frame}
 
+% ----------------------------------------------------------
 
+\begin{frame}
+\frametitle{Example of data (Pacific Hake)}
+
+% \centering
+
+\begin{minipage}{8cm}
+\includegraphics[height=6cm]{images/hake-ages.png}
+\end{minipage}
+\begin{minipage}{5cm}
+~~~~~~~~~~~~~~~~~~~~\includegraphics[height=1.5cm, right]{images/hake-pic.png}
+\end{minipage}
+
+\end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{What is the probability that the stock is in the healthy zone?}
+
+\centering
+\includegraphics[height=2.5in]{images/PA-graph.png}
+
+\end{frame}
 
 % ----------------------------------------------------------
 
@@ -252,7 +276,7 @@ I hope that you'll come away with an understanding of:
 
 \end{frame}
 
-
+% ----------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction to probability}
@@ -313,16 +337,6 @@ Other events:
 \item P(a die roll gives a 6)
 \item P(fish stock is currently in the healthy zone)
 \ei
-
-\end{frame}
-
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{What is the probability that the stock is in the healthy zone?}
-
-\centering
-\includegraphics[height=2.5in]{images/PA-graph.png}
 
 \end{frame}
 
@@ -931,23 +945,6 @@ Historical and projected spawning biomass for various catch levels
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Decision tables}
-
-In fisheries science, a decision table presents \alert{potential consequences of different decisions},\\
-and is used to help facilitate decision making.
-
-**Okay? I made that up.
-
-~\\
-
-For example, based on projections, show the
-probabilities of being in the healthy zone each year based on different
-levels of \alert{constant} catch.
-
-\end{frame}
-%----------------------------------------------------------
-
-\begin{frame}
 \frametitle{Decision tables}
 
 \centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
@@ -968,9 +965,28 @@ kable(df, "latex", booktabs = TRUE) %>%
       # add_header_above("hello") #c(" ", "Group 1" = 5, "Group 2" = 6))
 @
 
-600 t is just above average recent catch of 547 t
+~\\
+% 600 t is just above average recent catch of 547 t
 
 \end{frame}
+
+\begin{frame}
+\frametitle{Decision tables}
+
+\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
+<<dec-table5, results = "asis">>=
+kable(df, "latex", booktabs = TRUE) %>%
+      kable_styling(latex_options = "striped") %>%
+      column_spec(1, width = "2.5cm") %>%
+      row_spec(1, color = "red")
+@
+
+~\\
+
+% 600 t is just above average recent catch of 547 t
+
+\end{frame}
+
 
 %----------------------------------------------------------
 
@@ -985,25 +1001,8 @@ kable(df, "latex", booktabs = TRUE) %>%
       row_spec(4, color = "red")
 @
 
-600 t is just above average recent catch of 547 t
-
-\end{frame}
-
-
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{Decision tables}
-
-\centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
-<<dec-table5, results = "asis">>=
-kable(df, "latex", booktabs = TRUE) %>%
-      kable_styling(latex_options = "striped") %>%
-      column_spec(1, width = "2.5cm") %>%
-      row_spec(1, color = "red")
-@
-
-600 t is just above average recent catch of 547 t
+~\\
+% 600 t is just above average recent catch of 547 t
 
 \end{frame}
 
@@ -1021,7 +1020,7 @@ kable(df, "latex", booktabs = TRUE) %>%
       row_spec(6, color = "red")
 @
 
-600 t is just above average recent catch of 547 t
+~\\
 
 \end{frame}
 
@@ -1040,7 +1039,7 @@ kable(df, "latex", booktabs = TRUE) %>%
        column_spec(4, color = "red")
 @
 
-600 t is just above average recent catch of 547 t
+~\\
 
 \end{frame}
 
@@ -1060,7 +1059,7 @@ kable(df2, "latex", booktabs = TRUE) %>%
       column_spec(4, color = "red")
 @
 
-600 t is just above average recent catch of 547 t
+~\\
 
 
 \end{frame}
@@ -1108,6 +1107,11 @@ No general rule as to which way to do them.
 
 Often historical legacy, so can be confusing to change for a particular species
 to create consistency.
+
+~\\
+
+In fisheries science, a decision table presents \alert{potential consequences of different decisions},\\
+and is used to help facilitate decision making.
 
 \end{frame}
 
@@ -1193,7 +1197,7 @@ But often, we have \alert{data concerning different outcomes}, and want to
 
 P(X | Y) is the conditional probability that event $X$ happens (or $X$ is true) given event $Y$ happens.
 
-e.g. P(rains tomorrow | rains today)
+e.g. P(rains tomorrow | rained today)
 
 ~\\
 
@@ -1469,8 +1473,8 @@ Likelihood -- \alert{how likely is the model given the data?}
 
 ~\\
 
-Similarly, we have fisheries data and want to infer parameters and  make other
-calculations, essentially to calculate things such as
+Similarly, we have fisheries data and use likelihood to infer parameters and  make other
+calculations, to then calculate things such as
 
 ~\\
 
@@ -1884,7 +1888,7 @@ So risk does not simply mean probability -- you would not say ``the risk of gett
 \item Complex results incorporating Bayesian uncertainty can be meaningfully communicated to managers \& stakeholders through clear figures and tables
 \item  \alert{``Far more useful than low/medium/high elements of risk that we used to get''}
 \item Consistency in layout of results and tables is appreciated
-\item \alert{``the decision tables gives us the necessary flexibility to assess the risk/impact  of various catch levels''}
+\item \alert{``The decision tables gives us the necessary flexibility to assess the risk/impact  of various catch levels''}
 \ei
 \end{frame}
 
