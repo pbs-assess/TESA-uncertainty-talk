@@ -803,6 +803,16 @@ lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
 % ----------------------------------------------------------
 
 \begin{frame}
+\frametitle{Model schematic}
+
+\centering
+\includegraphics[height=4in]{images/model-schematic.png}
+
+\end{frame}
+
+% ----------------------------------------------------------
+
+\begin{frame}
 \frametitle{Communicating uncertainty}
 
 Catch data and vulnerable biomass estimated from a model:
@@ -859,10 +869,12 @@ Estimated recruitment (1000's of age-1 individuals) through time:
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{**Results in context of precautionary-approach figure}
+\frametitle{Results in context of precautionary-approach figure}
 
 \centering
-\includegraphics[height=2.5in]{images/snail.png}
+\includegraphics[height=2.5in]{images/snail-2.png}
+
+Here it would be too much to show uncertainty for \alert{all} years.
 
 \end{frame}
 
@@ -1679,7 +1691,7 @@ Vulnerable biomass from earlier:
 \frametitle{Further types of uncertainty}
 
 \bc
-  {\Huge \bf \alert{BIG CAVEAT}}
+  {\Huge \bf \alert{BIG CAVEATS}}
 \ec
 
 \bi
@@ -1699,6 +1711,25 @@ Vulnerable biomass from earlier:
 \ei
 
 \end{frame}
+
+% ---------------------------------------------
+
+\begin{frame}
+\frametitle{Further types of uncertainty}
+
+\bc
+  {\Huge \bf \alert{BIG CAVEATS}}
+\ec
+
+\bi
+\item Also \alert{data uncertainty}
+\item The models can account for some of the uncertainty and noise in the data
+\item But the data may still not be fully representative of the population
+\item Surveys are snapshots in time and space
+\ei
+
+\end{frame}
+
 
 %----------------------------------------------------------
 
@@ -1834,8 +1865,6 @@ So risk does not simply mean probability -- you would not say ``the risk of gett
 \item Consistency in layout of results and tables is appreciated
 \item \alert{``the decision tables gives us the necessary flexibility to assess the risk/impact  of various catch levels''}
 \ei
-**spell check
-**See Rob T's's email.
 \end{frame}
 
 %----------------------------------------------------------
@@ -1843,7 +1872,8 @@ So risk does not simply mean probability -- you would not say ``the risk of gett
 \begin{frame}
 \frametitle{Acknowledgements}
 
-Thanks for feedback/comments/emails: Rob Kronlund, Carrie Holt, Jaclyn Cleary, Rob Tadey,
+Thanks for feedback/comments/emails: Rob Kronlund, Carrie Holt, Jaclyn Cleary,
+Rowan Haigh, Rob Tadey,
 Ian Taylor.
 
 ~\\
