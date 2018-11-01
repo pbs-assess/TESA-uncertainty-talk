@@ -581,9 +581,30 @@ plot(xvalslog, yvalslog, col="red", lwd=3,
 quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
 lines(xvalslog[xvalslog < quants[3]], yvalslog[xvalslog < quants[3]], col="blue", type="h", lwd=4)
 lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
-
 abline(v=quants[3], col="black", lwd=3)
+set.seed=42
+boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TRUE, at=0.02, width=0.005)
 
+
+
+# for testint:
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = c(0, 0.03), type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+boxplot(rlnorm(1000, log(40), 0.7), xlab="complete box", horizontal=TRUE, add=TRUE, at=0.025, boxwex=0.01
+        )
+
+
+yrs=0.025     # yvalue to plot
+obj = quants
+delta = 0.25
+# From PBSawates	delta <- 0.25
+#			# Draw the outer whiskers.
+			segments( yrs,obj[1], yrs,obj[5], lty=1,col=1 )
+#			# Overlay the box.
+			rect( yrs-delta,obj[2], yrs+delta, obj[4])
+#			# Add the median.
+			segments( yrs-delta,obj[3],yrs+delta,obj[3],lty=1,col=1 )
 @
 
 \textcolor{blue}{Median} -- P(being $<$ median) = 0.5
@@ -622,6 +643,35 @@ abline(v=quants[1], col="black", lwd=3)
 ~\\
 
 \end{frame}
+
+%----------------------------------------------------------
+
+\begin{frame}
+\frametitle{Key terms}
+
+One way of summarising resulting distributions is through boxplots
+
+~\\
+
+<<hist-simp-9, fig.height=2.0>>=
+par(mai=cmai)
+plot(xvalslog, yvalslog, col="red", lwd=3,
+     xlim=range(xvalslog), ylim = ylimlog, type="l",
+     xlab="Weight, g", ylab="Probability density", xaxs="i", yaxs="i")
+quants = qlnorm(c(0.025, 0.25, 0.5, 0.75, 0.975), log(40), 0.7)
+lines(xvalslog[xvalslog < quants[1]], yvalslog[xvalslog < quants[1]], col="blue", type="h", lwd=4)
+lines(xvalslog, yvalslog, col="red", lwd=3)   # to be on top
+
+abline(v=quants[1], col="black", lwd=3)
+
+@
+
+% \textcolor{blue}{2.5\% percentile} -- P(being $<$ this value) = 0.025
+
+~\\
+
+\end{frame}
+
 % ----------------------------------------------------------
 
 \begin{frame}
@@ -1028,50 +1078,39 @@ That's essentially the idea of \alert{\emph{likelihood}}.
 
 %----------------------------------------------------------
 
-\begin{frame}
-\frametitle{Likelihood}
-
-So instead of
-
-~\\
-
-~~P(\textcolor{blue}{data} | \textcolor{red}{coin is fair}),
-
-~\\
-
-likelihood is
-
-~\\
-
-~~L(\textcolor{red}{coin is fair} | \textcolor{blue}{data}),
-
-~\\
-
-which is (essentially)
-
-~\\
-
-~~P(\textcolor{red}{coin is fair} | \textcolor{blue}{data}).
-
-~\\
-
-Likelihood of \textcolor{red}{hypothesis (coin is fair)} given the
-\textcolor{blue}{data (number of heads)}.
-
-
-%We have data and want to infer whether the coin is fair (whether the underlying probability
-%of getting a H, $p$, is 0.5).
-
+%\begin{frame}
+%\frametitle{Likelihood}
+%
+%So instead of
+%
 %~\\
-
-%~~P(\textcolor{red}{$p = 0.5$} | \textcolor{blue}{data}).
-
+%
+%~P(\textcolor{blue}{data} | \textcolor{red}{coin is fair}),
+%
+%\\
+%
+%ikelihood is
+%
 %~\\
-
-\end{frame}
+%
+%~~L(\textcolor{red}{coin is fair} | \textcolor{blue}{data}),
+%
+%~\\
+%
+%which is (essentially)
+%
+%~\\
+%
+%~~P(\textcolor{red}{coin is fair} | \textcolor{blue}{data}).
+%
+%~\\
+%
+%ikelihood of \textcolor{red}{hypothesis (coin is fair)} given the
+%\textcolor{blue}{data (number of heads)}.
+%
+%\end{frame}
 %----------------------------------------------------------
 
-%----------------------------------------------------------
 
 \begin{frame}
 \frametitle{Likelihood}
@@ -1287,18 +1326,26 @@ calculations, essentially to calculate things such as
 
 ~\\
 
-~~i.e.~P(\textcolor{red}{hyopthesis} | \textcolor{blue}{data}).
+% ~~i.e.~P(\textcolor{red}{hypothesis} | \textcolor{blue}{data}).
 
+\pause
+
+The \alert{stock assessment model} consists of equations (based on biological
+assumptions) and uses the various data sources to calculate such probabilities.
 ~\\
 
 \pause
 
-So likelihood has a specific technical meaning (so please don't say `likelihood' when you simply mean `probability').
+~\\
+
+So likelihood has a specific technical meaning (bit confusing to use `likelihood' when you simply mean `probability').
 
 ~\\
 
 In practice we often need to use a \emph{Bayesian} approach, due to complexity
-of models
+of models.
+
+
 
 
 
@@ -1312,12 +1359,14 @@ of models
 
 ~\\
 
+\pause
+
 I have one -- which film/play starts off with one of the main characters tossing 100
 heads in a row?
 
 \pause
 
-Rosencrantz and Guildenstern Are Dead
+Rosencrantz and Guildenstern are Dead
 
 ~\\
 
@@ -1506,16 +1555,19 @@ Vulnerable biomass from earlier:
 \ec
 
 \bi
-\item All these numerical probabilities depend on the \alert{assumptions of the model}
+\item All these numerical probabilities depend on the \alert{assumptions of the
+    assessment model}
+\item \alert{Structural uncertainty} -- uncertainty in the underlying biological assumptions
+  and hence the equations of the model
+\pause
 \item A different model will give different results
-\item Model is the best we can do
+% \item Model is the best we can do
 \item Model gives \alert{projections} based on assumptions being valid and
-  continuing to be valid, not \textcolor{blue}{predictions}.
+  continuing to be valid; \textcolor{blue}{not predictions}.
 
 \item One approach (recent Pacific Cod assessment) is to average the decision
-  tables for 10 or so** plausible models to account of uncertainty in picking the
-  \alert{`best'} model **See what Rob things ;)
-\item **discuss with Rob, Carrie. Risk, could then segway into risk
+  tables for 10 or so plausible models to account of uncertainty in picking the
+  \alert{`best'} model.
 \ei
 
 \end{frame}
@@ -1560,13 +1612,13 @@ But the \alert{\emph{probabilities of winning}} are the same (regardless of the 
 `Risk' is colloquially associated with a negative consequence:
 
 \bc
-\alert{``chance or possibility of danger, loss, injury etc.'' (OED)}
+\alert{``chance or possibility of danger, loss, injury etc.'' (OED).}
 \ec
 
-Quantitatively, risk is the
+Quantitatively, risk is defined as the
 
 \bc
-\alert``expected value of an undesirable outcome,''
+\alert{``expected value of an undesirable outcome,''}
 \ec
 
 and can be expressed as
@@ -1588,19 +1640,26 @@ in the context of fisheries management.
 \frametitle{Risk}
 
 \bc
-P(outcome) $\times$ expected loss if outcome occurs
+\textcolor{blue}{Risk = P(outcome) $\times$ expected loss if outcome occurs}
 \ec
 
+~\\
+
 In assessments we can calculate
+
+~\\
+
 \bc
-P(stock will be in the critical zone next year if catch stays the same)
+\textcolor{blue}{P(stock will be in the critical zone next year if catch stays the same)}
 \ec
+
+~\\
 
 but what is the expected loss of this outcome?
 
-Hard to quantify.
+~\\
 
-Will be different for different stakeholders.
+Very hard to quantify. \textcolor{red}{Will be different for different stakeholders.}
 
 \end{frame}
 
@@ -1613,19 +1672,25 @@ So risk depends on the consequences of the outcome.
 
 ~\\
 
-It does not mean probability -- you would not say ``the risk of getting heads''.
+You might hear
+
+\bc
+\alert{``the risk of being in the cautious zone''}
+\ec
+
+but the risk depends on their value of the loss.
 
 ~\\
 
-You might hear ``the risk of being in the cautious zone''
+You wouldn't really hear
 
-~\\
+\bc
+\alert{``the risk of being in the healthy zone''}
+\ec
 
-~~but not ``the risk of being in the healthy zone''
+since there is not really a negative consequence.
 
-~\\
-
-So don't say `risk' when you just mean `probability'.
+So risk does not simply mean probability -- you would not say ``the risk of getting heads''.
 
 \end{frame}
 
@@ -1638,12 +1703,9 @@ So don't say `risk' when you just mean `probability'.
 \item Giving explicit uncertainties is appreciated
 \item Complex results incorporating Bayesian uncertainty can be meaningfully communicated to managers \& stakeholders through clear figures and tables
 \item  \alert{``Far more useful than low/medium/high elements of risk that we used to get''}
-\item Consistency in layout of results and tables is appreciated (**caveats - we
-  generally do this when updating assessments, not necessarily between
-  assessments; can be hard to change, **show hake one somewhere.)
+\item Consistency in layout of results and tables is appreciated
 \item \alert{``the decision tables gives us the necessary flexibility to assess the risk/impact  of various catch levels''}
 \ei
-** Uncertainty about uncertainty.
 **spell check
 **See Rob T's's email.
 \end{frame}
@@ -1658,6 +1720,12 @@ Ian Taylor.
 
 ~\\
 
+Next week: \textcolor{blue}{Rob Kronlund -- Management Strategy Evaluation}
+
+~\\
+
+~\\
+
 Further reading/viewing:
 
 ~\\
@@ -1667,6 +1735,9 @@ David Spiegelhalter (Winton Professor for the Public Understanding of Risk, Camb
 \bc
 \alert{``Transparent evidence designed to inform, not to persuade''}
 \ec
+
+
+
 
 \end{frame}
 
