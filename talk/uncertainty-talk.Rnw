@@ -370,36 +370,36 @@ plot(as.factor(rolls), xlab="Number on die", ylab="Count", ylim=c(0,100))
 
 %----------------------------------------------------------
 
-\begin{frame}
-\frametitle{Discrete outcomes}
-
-Similarly, count data are \alert{discrete} and take whole numbers.
-
-~\\
-
-Such as annual numbers of lynx trappings for 1821-1934 in Canada:
-
-~\\
-
-~~269,  321,  585,  871, 1475, 2821, 3928, 5943, 4950, 2577, 523, ...
-
+%\begin{frame}
+%\frametitle{Discrete outcomes}
+%
+%Similarly, count data are \alert{discrete} and take whole numbers.
+%
+%~\\
+%
+%Such as annual numbers of lynx trappings for 1821-1934 in Canada:
+%
+%~\\
+%
+%~~269,  321,  585,  871, 1475, 2821, 3928, 5943, 4950, 2577, 523, ...
+%
 % lynx[1:11]
-~\\
-
-Take those first 11 years and sort into order:
-
+%~\\
+%
+%Take those first 11 years and sort into order:
+%
 % sort(lynx[1:11])
-~\\
-
-~~269  321  523 585  871 \alert<2->{1475} 2577 2821 3928 4950 5943
-
-~\\
-
-\onslide<2-> \alert{Median} is the value in the middle
-
-\onslide<3-> \textcolor{blue}{Mean} is 2205.7, the total divided by 11.
-
-\end{frame}
+%~\\
+%
+%~~269  321  523 585  871 \alert<2->{1475} 2577 2821 3928 4950 5943
+%
+%\\
+%
+%onslide<2-> \alert{Median} is the value in the middle
+%
+%\onslide<3-> \textcolor{blue}{Mean} is 2205.7, the total divided by 11.
+%
+%\end{frame}
 %----------------------------------------------------------
 
 \begin{frame}
@@ -803,16 +803,6 @@ lines(quants[4:5], c(box.at, box.at))   # Manual whiskers
 % ----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Model schematic}
-
-\centering
-\includegraphics[height=4in]{images/model-schematic.png}
-
-\end{frame}
-
-% ----------------------------------------------------------
-
-\begin{frame}
 \frametitle{Communicating uncertainty}
 
 Catch data and vulnerable biomass estimated from a model:
@@ -878,6 +868,8 @@ Here it would be too much to show uncertainty for \alert{all} years.
 
 \end{frame}
 
+% ----------------------------------------------------------
+
 \begin{frame}
 
 \frametitle{Questions?}
@@ -899,10 +891,24 @@ Any question so far?
 \begin{frame}
 \frametitle{Going forward -- projections}
 
-\centering
+\bc
+Historical and projected spawning biomass
+
+~\\
+
+\includegraphics[height=14cm]{images/projections-crop.png}
+\ec
+
+\end{frame}
+
+%----------------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Going forward -- projections}
 
 \begin{minipage}{4cm}
-Spawning biomass up to 2013 (black), and projected spawning biomass (red) based on six values of constant catch, for 2013 to 2023.
+Historical and projected spawning biomass for various catch levels
 \end{minipage}
 \begin{minipage}{10cm}
 \includegraphics[height=7.5cm]{images/projections.png}
@@ -930,7 +936,7 @@ levels of \alert{constant} catch.
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How do fisheries managers use information to make decisions?}
+\frametitle{Decision tables}
 
 \centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table, results = "asis">>=
@@ -957,7 +963,7 @@ kable(df, "latex", booktabs = TRUE) %>%
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How do fisheries managers use information to make decisions?}
+\frametitle{Decision tables}
 
 \centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table4, results = "asis">>=
@@ -975,7 +981,7 @@ kable(df, "latex", booktabs = TRUE) %>%
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How do fisheries managers use information to make decisions?}
+\frametitle{Decision tables}
 
 \centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table5, results = "asis">>=
@@ -993,7 +999,7 @@ kable(df, "latex", booktabs = TRUE) %>%
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How do fisheries managers use information to make decisions?}
+\frametitle{Decision tables}
 
 \centering P($B_t > 0.8 \Bmsy)$, i.e.~stock in healthy zone at start of year $t$
 <<dec-table6, results = "asis">>=
@@ -1050,7 +1056,7 @@ kable(df2, "latex", booktabs = TRUE) %>%
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{How do fisheries managers use information to make decisions?}
+\frametitle{Decision tables}
 
 For Pacific Ocean Perch assessments we have tended to give P(in healthy zone) etc.,
 
@@ -1065,7 +1071,7 @@ Other assessments tend to show P(being in bad place), e.g. P(below healthy zone)
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Pacific Hake -- other way round**}
+\frametitle{Pacific Hake -- other way round}
 
 Pacific Hake (different type of table -- shows various probabilities
 under different catches for just one year):
@@ -1111,26 +1117,7 @@ Was originally preferred by stakeholders.
 % ----------------------------------------------------------
 
 \begin{frame}
-\frametitle{***}
-
-Can show decimals in tables (less clutter) and percentages in text which can
-read more naturally for stakeholders (e.g. Pacific Herring).
-
-**
-
-
-
-\centering
-\includegraphics[height=7.5cm]{images/hake-dec-table.png}
-
-
-\end{frame}
-
-
-%----------------------------------------------------------
-
-\begin{frame}
-\frametitle{How do fisheries managers use information to make decisions?}
+\frametitle{How could fisheries managers use information to make decisions?}
 
 \centering
 \includegraphics[height=7.5cm]{images/combine-results.png}
@@ -1138,6 +1125,16 @@ read more naturally for stakeholders (e.g. Pacific Herring).
 \end{frame}
 
 % ----------------------------------------------------------
+
+\begin{frame}
+\frametitle{So how do we obtain these probabilities?}
+
+\centering
+\includegraphics[height=4in]{images/model-schematic.png}
+
+\end{frame}
+
+% --------------------------------------
 
 \begin{frame}
 \frametitle{So how do we obtain these probabilities?}
@@ -1456,6 +1453,10 @@ like_fig(6, prop_heads=0.5)
 \begin{frame}
 \frametitle{Likelihood}
 
+Likelihood -- \alert{how likely is the model given the data?}
+
+~\\
+
 Similarly, we have fisheries data and want to infer parameters and  make other
 calculations, essentially to calculate things such as
 
@@ -1522,9 +1523,15 @@ Rosencrantz and Guildenstern are Dead
 Involves using \emph{prior} information and combining it with the
 \emph{likelihood} of the data to give a \emph{posterior}.
 
+Reverend Thomas Bayes...
+
+\includegraphics[width=4cm, center]{images/bayes-himself-maybe.png}
+
+\onslide<2>{\rightline{\alert{\emph{...perhaps~~~~~}}}}
+
 \end{frame}
 
-%----------------------------------------------------------
+% ----------------------------------------------------------
 
 % \begin{frame}
 % \frametitle{Bayesian figures*** three like before}
@@ -1676,7 +1683,9 @@ However, can see that the biomass can deviate somewhat from the median.
 \begin{frame}
 \frametitle{Boxplot from earlier}
 
-So we do not just show median, also need to show the uncertainty.
+Those different MCMC simulations are what are used to then make the boxplots.
+
+~\\
 
 Vulnerable biomass from earlier:
 
