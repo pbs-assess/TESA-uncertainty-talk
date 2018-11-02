@@ -101,7 +101,7 @@
 \newcommand{\en}{\end{enumerate}}
 \newcommand{\bi}{\begin{itemize}}
 \newcommand{\ei}{\end{itemize}}
-\newcommand{\Bmsy}{B_{MSY}}
+\newcommand{\Bmsy}{B_{\mbox{\tiny{MSY}}}}
 \newcommand{\howlikely}{How likely are different values of $p$ (the underlying probability of getting a head)?}
 %% <<echo=TRUE,  message=TRUE, results='show', warning=TRUE>>=
 %% opts_chunk$set(dev='cairo_ps',fig.path='knitr-cache/', fig.dpi=96, fig.width=7.5,
