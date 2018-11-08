@@ -1,0 +1,23 @@
+From tecra13to17/tecra07to13/dal My Documents/rprogs/bayes/ - was going through   
+ notes at Dal from Draper (course?).
+
+
+draper4.r -  Chap 5 (p10) binomial bike example. Trying in non-Bayesian way.
+ Calc log likelihood,find MLE, find 95% conf interval using W, likelihood ratio
+ statistic (that is chisq with p deg freedom). From B8 Oxford stats notes.
+draper4a.r - changing the numbers of bikes and total vehicles, but keeping
+ the proportions the same. Gives table (in comments at start) of multiple of
+ original data and the 95% conf interval for theta. Also Bayesian with beta 
+ prior. I played with the multiple and recorded each tiem the conf interval.
+draper4b.r - Doing it the Bayesian way, but have conjugacy so can just write
+ down the posterior, which is dbeta(thetavec, 2+s, 6.4+n-s), where 
+ dbeta(thetavec, 2, 6.4)is the prior. qbeta(c(0.05,0.95), 2, 6.4) = 
+ (0.05, 0.50) = 90% interval
+
+draper4btalk.r - Doing bike example for Durham job talk, to give example of
+ Bayes' Theorem in action. Changing the numbers to say "observe 10 vehicles,
+ or 100 or 1000".
+Saving as .png as follows: (and make all have the same max values)
+dt1.png - n = 5, s =2
+dt2.png - n=20, s=8
+dt3.png - n=100, s=40
