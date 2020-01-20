@@ -1,8 +1,7 @@
 % edwards-uncertainty.Rnw - shorter 20-minute version for TESA Risk workshop,
 %  January 2020.
 % library(knitr)
-% knit("edwards-uncertainty.Rnw")
-% shell("pdflatex edwards-uncertainty")
+% knit("edwards-uncertainty.Rnw"); shell("pdflatex edwards-uncertainty")
 %
 % \documentclass[handout,xcolor=pdftex,dvipsnames,table]{beamer}
 %\documentclass[draft]{beamer}
@@ -147,8 +146,8 @@ admb.version = 999
 % \titlegraphic{\includegraphics[height=3.3cm]{images/pbs.png}}
 \titlegraphic{images/pbs.png}
 \date{{\footnotesize SRG meeting -- \Sexpr{assess.yr}}}
-\subtitle{\small Lecture 5 of TESA's \emph{Introduction to Stock Assessment} WebEx series.\\
-Thursday 1st November, 2018}
+\subtitle{\small TESA Workshop on Uncertainty, Risk and Stock Summaries\\
+Ottawa, Monday 27th January, 2020}
 
 \begin{document}
 
@@ -163,7 +162,7 @@ Thursday 1st November, 2018}
 %----------------------------------------------------------
 
 \begin{frame}
-\frametitle{Aims of this lecture}
+\frametitle{**Aims of this lecture}
 % ~\\
 
 I hope that you'll come away with an understanding of:
@@ -185,9 +184,9 @@ I hope that you'll come away with an understanding of:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\section{Outline}
+\section{**Outline}
 \subsection{}
-\frame{\frametitle{Outline}
+\frame{\frametitle{**Outline}
 \bi
   \item Basic introduction to probability
   \item Examples of probabilities that we can calculate in assessments
@@ -210,43 +209,6 @@ I hope that you'll come away with an understanding of:
 
 
 %----------------------------------------------------------
-
-\begin{frame}
-\frametitle{About me}
-~\\
-
-\begin{minipage}{12cm}
-\bi
-  \item Pacific Biological Station since 2007
-  \item Previously at Bedford Institute of Oceanography \& Dalhousie
-\ei
-\end{minipage}
-\begin{minipage}{2cm}
-  \includegraphics[width=1.3cm, right]{images/andyCrop2.jpg}
-\end{minipage}
-
-\bi
-  \item Stock assessment work:
-    \bi
-    \item rockfish (long-lived, good age data)
-    \item Pacific Hake (joint with U.S. colleagues)
-    \item data synopsis for $>100$ species of British Columbia groundfish
-  \ei
-  \item Recent research:
-  \bi
-    \item methods for fitting size spectra
-    \item notation guidelines (in press):
-  \ei
-\ei
-\medskip
-%\hfill
-\pause
-% \includegraphics[width=5cm, right]{images/MEE.png}\\
-~~~\includegraphics[width=10cm, center]{images/notation-header.png}
-% \vskip10pt
-\end{frame}
-
-% ----------------------------------------------------------
 
 \begin{frame}
 \frametitle{Example of data (Pacific Hake)}
@@ -903,24 +865,6 @@ Here it would be too much to show uncertainty for \alert{all} years.
 % ----------------------------------------------------------
 
 \begin{frame}
-
-\frametitle{Questions?}
-
-Any question so far?
-
-\pause
-
-~\\
-
-~\\
-
-\includegraphics[width=8cm, center]{images/correlation.png}
-
-\end{frame}
-
-% ----------------------------------------------------------
-
-\begin{frame}
 \frametitle{Going forward -- projections}
 
 \bc
@@ -1513,31 +1457,8 @@ of models.
 
 
 \end{frame}
-%----------------------------------------------------------
 
-
-\begin{frame}
-
-\frametitle{Questions?}
-
-~\\
-
-\pause
-
-I have one -- which film/play starts off with one of the main characters tossing 100
-heads in a row?
-
-\pause
-
-Rosencrantz and Guildenstern are Dead
-
-~\\
-
-\includegraphics[width=6cm, center]{images/rosencrantz.png}
-
-\end{frame}
-
-%----------------------------------------------------------
+% ----------------------------------------------------------
 
 \begin{frame}
 \frametitle{Bayesian approach}
