@@ -867,22 +867,6 @@ Here it would be too much to show uncertainty for \alert{all} years.
 \begin{frame}
 \frametitle{Going forward -- projections}
 
-\bc
-Historical and projected spawning biomass
-
-~\\
-
-\includegraphics[height=14cm]{images/projections-crop.png}
-\ec
-
-\end{frame}
-
-%----------------------------------------------------------
-
-
-\begin{frame}
-\frametitle{Going forward -- projections}
-
 \begin{minipage}{4cm}
 Historical and projected spawning biomass for various catch levels
 \end{minipage}
@@ -902,12 +886,12 @@ Historical and projected spawning biomass for various catch levels
 # Taking numbers from EdwardsICES14.pptx talk, think results are POP 3CD
 #  Changing years to avoid confusion that it's projections
 df = tibble("Annual catch strategy (t)" = seq(0, 1000, 200),
-            "2013" = rep(0.87, 6),
-            "2014" = c(0.88, 0.88, 0.87, 0.86, 0.86, 0.85),
-            "2015" = c(0.90, 0.89, 0.88, 0.86, 0.85, 0.83),
-            "2016" = c(0.92, 0.90, 0.88, 0.86, 0.85, 0.83),
-            "2017" = c(0.93, 0.91, 0.89, 0.87, 0.85, 0.82),
-            "2018" = c(0.94, 0.92, 0.90, 0.87, 0.85, 0.81)
+            "2020" = rep(0.87, 6),
+            "2021" = c(0.88, 0.88, 0.87, 0.86, 0.86, 0.85),
+            "2022" = c(0.90, 0.89, 0.88, 0.86, 0.85, 0.83),
+            "2023" = c(0.92, 0.90, 0.88, 0.86, 0.85, 0.83),
+            "2024" = c(0.93, 0.91, 0.89, 0.87, 0.85, 0.82),
+            "2025" = c(0.94, 0.92, 0.90, 0.87, 0.85, 0.81)
             )
 kable(df, "latex", booktabs = TRUE) %>%
       kable_styling(latex_options = "striped") %>%
